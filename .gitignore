@@ -10,3 +10,5 @@
 /gradle.properties
 /buildSrc/.gradle/
 /buildSrc/build/
+/extensions/src/androidTest
+/extensions/src/test
