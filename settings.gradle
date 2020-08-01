@@ -1,0 +1,4 @@
+rootProject.name = "DNFMobile"
+
+include ':app'
+include ':core'
