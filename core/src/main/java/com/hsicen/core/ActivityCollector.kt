@@ -1,4 +1,4 @@
-package com.hsicen.extensions
+package com.hsicen.core
 
 import android.app.Activity
 

@@ -9,6 +9,17 @@ buildscript {scriptHandler ->
     }
 }
 
+subprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            freeCompilerArgs = [
+                    "-Xuse-experimental=kotlin.Experimental",
+                    "-Xuse-experimental=kotlin.contracts.ExperimentalContracts",
+            ]
+        }
+    }
+}
+
 //所有Project(Module)配置
 apply from: 'module_config.gradle'
 
