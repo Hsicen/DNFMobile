@@ -1,40 +1,18 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//其它公共配置在module_config.gradle 文件中
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
-
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-
-    api Deps.junitJava
-    api Deps.junitAndroid
-    api Deps.espresso
-
-    api Deps.kotlinStdLib
-    api Deps.coreKtx
-    api Deps.appcompat
-    api Deps.constraintLayout
-
 
 }

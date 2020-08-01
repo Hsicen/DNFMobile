@@ -1,0 +1,27 @@
+ext {
+    //环境配置
+    environment = [
+            dev      : [
+                    server   : "http://klicen.dvo.iklicen.com"
+            ],
+            ts       : [
+                    server   : "http://klicen.ts.iklicen.com"
+            ],
+            prd      : [
+                    server   : "https://k.klicen.com"
+            ]
+    ]
+
+    //编译版本配置
+    app_key = [
+            dev    : [
+                    applicationId: "com.lxt.app.dev",
+            ],
+            test   : [
+                    applicationId: "com.lxt.app.test",
+            ],
+            release: [
+                    applicationId: "com.lxt.app",
+            ]
+    ]
+}

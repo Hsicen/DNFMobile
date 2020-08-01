@@ -1,28 +1,18 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//其它公共配置在module_config.gradle 文件中
 
 android {
-    compileSdkVersion Versions.compileSDK
-    buildToolsVersion Versions.buildTools
-
     defaultConfig {
         applicationId "com.hsicen.dnfmobile"
-        minSdkVersion Versions.minSDK
-        targetSdkVersion Versions.targetSDK
-        versionCode Versions.versionCode
-        versionName Versions.versionName
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':core')
 }

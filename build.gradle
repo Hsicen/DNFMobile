@@ -1,8 +1,7 @@
-buildscript {
-    repositories {
-        google()
-        jcenter()
-    }
+//Gradle 编译配置
+buildscript {scriptHandler ->
+    apply from: 'repositories.gradle', to: scriptHandler
+    apply from: 'configs.gradle'
 
     dependencies {
         classpath "com.android.tools.build:gradle:$Versions.buildGradle"
@@ -10,12 +9,8 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
-}
+//所有Project(Module)配置
+apply from: 'module_config.gradle'
 
 task clean(type: Delete) {
     delete rootProject.buildDir

@@ -1,0 +1,6 @@
+//测试依赖库
+dependencies {
+    api Deps.junitJava
+    api Deps.junitAndroid
+    api Deps.espresso
+}

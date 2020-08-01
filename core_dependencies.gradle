@@ -1,0 +1,9 @@
+//公共依赖库
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation Deps.kotlinStdLib
+    implementation Deps.coreKtx
+    implementation Deps.appcompat
+    implementation Deps.constraintLayout
+}

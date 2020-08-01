@@ -1,0 +1,41 @@
+//所有模块配置  在这里可以对每个做指定的配置
+//可以在这里做公共配置，特殊配置可以在每个Module的 build.gradle 文件中单独指定
+
+subprojects {
+    def projectName = project.name
+    def isApp = projectName == "app"
+
+    if (isApp) {
+        apply plugin: 'com.android.application'
+    } else {
+        apply plugin: 'com.android.library'
+    }
+
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+
+    apply from: '../core_dependencies.gradle'
+    apply from: '../test_dependencies.gradle'
+    apply from: '../repositories.gradle'
+
+    android {
+        compileSdkVersion Versions.compileSDK
+        buildToolsVersion Versions.buildTools
+
+        defaultConfig {
+            minSdkVersion Versions.minSDK
+            targetSdkVersion Versions.targetSDK
+            versionCode Versions.versionCode
+            versionName Versions.versionName
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+    }
+}
