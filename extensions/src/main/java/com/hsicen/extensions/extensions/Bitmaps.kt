@@ -1,15 +1,13 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.hsicen.extensions.extensions
 
 import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Matrix
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Environment
-import java.io.File
-import java.io.FileOutputStream
+import java.io.*
 
 /**
  * <p>作者：Hsicen  2019/7/23 15:22
@@ -126,4 +124,89 @@ fun Bitmap.save(childPath: String): String {
     this.recycle()
 
     return path
+}
+
+/**
+ * 保存到文件中.
+ * @receiver Bitmap
+ * @param path String 保存路径，包含文件名.
+ * @param format Bitmap.CompressFormat 保存格式，默认为jpg.
+ * @param quality Int 保存质量，默认为100.
+ * @return File?
+ */
+inline fun Bitmap.save2File(
+    path: String,
+    format: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG,
+    quality: Int = 100
+): File? =
+    kotlin.runCatching {
+        val bitmapFile = File(path)
+        if (bitmapFile.exists()) {
+            bitmapFile.delete()
+        } else {
+            val folder = File(bitmapFile.parent ?: Environment.getExternalStorageDirectory().path)
+            if (!folder.exists()) {
+                folder.mkdirs()
+            }
+            bitmapFile.createNewFile()
+        }
+        FileOutputStream(bitmapFile).use { out ->
+            compress(format, quality, out)
+        }.let {
+            if (it) bitmapFile else null
+        }
+    }.getOrNull()
+
+/**
+ * Bitmap转输入流.
+ * @receiver Bitmap
+ * @return InputStream
+ */
+inline fun Bitmap.toInputStream(): InputStream =
+    ByteArrayOutputStream().use {
+        compress(Bitmap.CompressFormat.JPEG, 100, it)
+        ByteArrayInputStream(it.toByteArray())
+    }
+
+/**
+ * 转化为白色背景.
+ * @receiver Bitmap
+ * @return Bitmap
+ */
+inline fun Bitmap.withWhiteBg(): Bitmap {
+    val newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(newBitmap)
+    canvas.drawColor(Color.WHITE)
+    canvas.drawBitmap(this, 0f, 0f, Paint())
+    return newBitmap
+}
+
+/**
+ *  修改bitmap颜色.
+ */
+val canvas by lazy { Canvas() }
+val paint by lazy {
+    Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        isAntiAlias = true
+    }
+}
+
+var outBitmap: Bitmap? = null
+inline fun Bitmap?.tintBitmap(color: Int): Bitmap? {
+    this ?: return null
+
+    outBitmap = if (outBitmap == null) {
+        Bitmap.createBitmap(this.width, this.height, this.config)
+    } else {
+        // 配置一样就复用.
+        if (this.width == outBitmap!!.width && this.height == outBitmap!!.height && this.config == outBitmap!!.config) {
+            outBitmap
+        } else {
+            Bitmap.createBitmap(this.width, this.height, this.config)
+        }
+    }
+    canvas.setBitmap(outBitmap)
+    paint.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+    canvas.drawBitmap(this, 0f, 0f, paint)
+    return outBitmap
 }

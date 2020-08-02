@@ -41,3 +41,14 @@ val Int.dp2px: Int
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP, this * 1.0f, Resources.getSystem().displayMetrics
     ).toInt()
+
+/**
+ *  获取屏幕高度
+ */
+fun screenHeight(): Int {
+    return Resources.getSystem().displayMetrics.heightPixels
+}
+
+fun screenWidth(): Int {
+    return Resources.getSystem().displayMetrics.widthPixels
+}

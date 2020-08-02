@@ -26,13 +26,15 @@ object Versions {
 
     const val appcompat = "1.1.0"
     const val constraintLayout = "1.1.3"
+    const val logger = "2.2.0"
+
 
     //Test version
     const val junitJava = "4.13"
     const val junitAndroid = "1.1.1"
     const val espresso = "3.2.0"
-
 }
+
 
 //统一管理项目中使用的依赖库
 object Deps {
@@ -42,6 +44,7 @@ object Deps {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val constraintLayout =
         "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val logger = "com.orhanobut:logger:${Versions.logger}"
 
 
     //Test deps
