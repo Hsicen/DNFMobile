@@ -1,8 +1,8 @@
 package com.hsicen.extensions.extensions
 
-import android.transition.Transition
-import android.transition.TransitionManager
 import android.view.ViewGroup
+import androidx.transition.Transition
+import androidx.transition.TransitionManager
 
 /**
  * 作者：hsicen  2020/8/2 15:25

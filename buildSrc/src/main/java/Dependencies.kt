@@ -28,6 +28,9 @@ object Versions {
     const val constraintLayout = "1.1.3"
     const val logger = "2.2.0"
 
+    const val adapterHelper = "2.9.45-androidx"
+    const val glide = "4.8.0"
+
 
     //Test version
     const val junitJava = "4.13"
@@ -45,6 +48,13 @@ object Deps {
     const val constraintLayout =
         "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val logger = "com.orhanobut:logger:${Versions.logger}"
+    const val adapterHelper =
+        "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.adapterHelper}"
+
+    //Glide
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glideOkHttp = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
+    const val glideRV = "com.github.bumptech.glide:recyclerview-integration:${Versions.glide}"
 
 
     //Test deps
@@ -52,4 +62,3 @@ object Deps {
     const val junitAndroid = "androidx.test.ext:junit:${Versions.junitAndroid}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 }
-

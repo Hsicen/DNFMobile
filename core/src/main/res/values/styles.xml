@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Dialog" />
+
+    <style name="Dialog.Title">
+        <item name="android:textSize">@dimen/font_z7</item>
+        <item name="android:textColor">@color/font_g2</item>
+    </style>
+
+    <style name="Dialog.Message">
+        <item name="android:textSize">@dimen/font_z5</item>
+        <item name="android:textColor">@color/font_g3</item>
+    </style>
+
+    <style name="Dialog.Button" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textSize">@dimen/font_z4</item>
+        <item name="android:textColor">@color/k_accent</item>
+    </style>
+
+    <style name="Dialog.Button.Negative" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textSize">@dimen/font_z4</item>
+        <item name="android:textColor">@color/font_g4</item>
+    </style>
+
+    <style name="Loading" parent="AlertDialog.AppCompat.Light">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>
