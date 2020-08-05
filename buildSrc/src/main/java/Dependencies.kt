@@ -22,12 +22,17 @@ object Versions {
 
     //kotlin
     const val kotlinVersion = "1.3.72"
-    const val ktx = "1.3.1"
 
+    //官方库
+    const val ktx = "1.3.1"
     const val appcompat = "1.1.0"
     const val constraintLayout = "1.1.3"
-    const val logger = "2.2.0"
+    const val coroutines = "1.3.5"
+    const val material = "1.1.0"
 
+
+    //三方库
+    const val logger = "2.2.0"
     const val adapterHelper = "2.9.45-androidx"
     const val glide = "4.8.0"
 
@@ -41,20 +46,29 @@ object Versions {
 
 //统一管理项目中使用的依赖库
 object Deps {
+    //官方系统库
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.ktx}"
-
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val constraintLayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+            "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val material = "com.google.android.material:material:${Versions.material}"
+
+    //日志打印
     const val logger = "com.orhanobut:logger:${Versions.logger}"
+
+    //Adapter
     const val adapterHelper =
-        "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.adapterHelper}"
+            "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.adapterHelper}"
 
     //Glide
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideOkHttp = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
     const val glideRV = "com.github.bumptech.glide:recyclerview-integration:${Versions.glide}"
+
+    //coroutines
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
 
     //Test deps
