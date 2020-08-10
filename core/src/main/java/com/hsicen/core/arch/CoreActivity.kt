@@ -39,15 +39,24 @@ abstract class CoreActivity(
         initData()
     }
 
-    open fun initVariable() {
+    /**
+     * 初始化Intent数据
+     */
+    protected open fun initVariable() {
 
     }
 
-    open fun initView() {
+    /**
+     * 初始化View
+     */
+    protected open fun initView() {
 
     }
 
-    open fun initData() {
+    /**
+     * 初始化数据
+     */
+    protected open fun initData() {
 
     }
 
