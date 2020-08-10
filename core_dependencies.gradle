@@ -23,4 +23,7 @@ dependencies {
     implementation Deps.glide
     implementation Deps.glideOkHttp
     implementation Deps.glideRV
+
+    implementation 'androidx.navigation:navigation-fragment:2.3.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
 }
