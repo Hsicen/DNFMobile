@@ -101,8 +101,5 @@
     <color name="red_dot">#F7605B</color>
     <color name="color_gray">#AEB2B7</color>
 
-    <!--换肤相关, skin开头,无关的不要用-->
-    <color name="skin_primary">@color/k_primary</color>
-    <color name="skin_start_primary">@color/blue_3</color>
-    <!--换肤相关end-->
+    <color name="k_toast_background_color">#7f000000</color>
 </resources>
