@@ -6,38 +6,25 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import androidx.annotation.CallSuper
-import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.hsicen.core.ui.loading.KLoadingDialog
-import com.hsicen.core.ui.loading.showKLoading
 import com.hsicen.extensions.extensions.hideKeyboard
 import com.hsicen.extensions.extensions.hideKeyboardWithDelay
 import com.hsicen.extensions.extensions.yes
 
 
 /**
- * 核心Activity
- * Created by tomlezen.
- * Data: 2019/3/22.
- * Time: 11:42.
- * @property layoutResID: Int 界面布局ID.
+ * 作者：hsicen  2020/8/10 20:58
+ * 邮箱：codinghuang@163.com
+ * 功能：
+ * 描述：核心Activity
  */
 abstract class CoreActivity(
     @LayoutRes private val layoutResID: Int
 ) : AppCompatActivity() {
-
-    var kLoading: KLoadingDialog? = null
-        set(value) {
-            // 先判断并取消掉上一个loading
-            if (field?.isShowing == true) {
-                field?.dismiss()
-            }
-            field = value
-        }
 
     /** 点击外部关闭软件盘. */
     var touchOutSideCloseKeyboard = false
@@ -46,9 +33,25 @@ abstract class CoreActivity(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResID)
+
+        initVariable()
+        initView()
+        initData()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
+    open fun initVariable() {
+
+    }
+
+    open fun initView() {
+
+    }
+
+    open fun initData() {
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         android.R.id.home -> {
             onBackPressed()
             true
@@ -71,7 +74,6 @@ abstract class CoreActivity(
     override fun onDestroy() {
         hideKeyboard()
         super.onDestroy()
-        coreComponent().refWatcher()?.watch(this)
     }
 
     /**
@@ -94,74 +96,12 @@ abstract class CoreActivity(
     }
 
     /**
-     * Fragment导航.
-     * @param hostId Int
-     * @param id Int
-     * @param bundle Bundle?
-     * @param navigatorExtras Navigator.Extras?
-     * @param optionsBuilder (NavOptions.Builder.() -> Unit)
-     */
-    fun nav(
-        @IdRes hostId: Int,
-        @IdRes id: Int,
-        bundle: Bundle? = null,
-        navigatorExtras: Navigator.Extras? = null,
-        optionsBuilder: (NavOptions.Builder.() -> Unit) = {}
-    ) {
-        Navigation.findNavController(this, hostId)
-            .navigate(
-                id,
-                bundle,
-                defNavOptions.apply {
-                    optionsBuilder.invoke(this)
-                }.build(),
-                navigatorExtras
-            )
-    }
-
-    /**
      * LiveData 扩展.
      * @receiver LiveData<T>
      * @param block (data: T) -> Unit
      */
     infix fun <T> LiveData<T>?.observe(block: (data: T) -> Unit) =
         this?.observe(this@CoreActivity, Observer { block.invoke(it) })
-
-    /**
-     * 加载状态默认处理.
-     * @receiver LiveData<LoadState>?
-     * @param hookLoading (() -> Boolean)?
-     * @param hookLoaded ((LoadState.Loaded) -> Boolean)?
-     * @param hookLoadError ((LoadState.LoadError) -> Boolean)?
-     */
-    fun LiveData<LoadState>?.observeDefHandle(
-        hookLoading: (() -> Boolean)? = null,
-        hookLoaded: ((LoadState.Loaded) -> Boolean)? = null,
-        hookLoadError: ((LoadState.LoadError) -> Boolean)? = null
-    ) {
-        this observe {
-            when (it) {
-                is LoadState.Loading -> {
-                    if (hookLoading?.invoke() != true) {
-                        if (kLoading?.isShowing != true) {
-                            kLoading = showKLoading()
-                        }
-                    }
-                }
-                is LoadState.Loaded -> {
-                    if (hookLoaded?.invoke(it) != true) {
-                        kLoading?.dismiss()
-                    }
-                }
-                is LoadState.LoadError -> {
-                    if (hookLoadError?.invoke(it) != true) {
-                        kLoading?.dismiss()
-                        it.exception?.handleForNetwork()
-                    }
-                }
-            }
-        }
-    }
 }
 
 /**
