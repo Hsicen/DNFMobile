@@ -153,7 +153,7 @@ class CoreRvAdapter<M : Any>(
         render?.invoke(item, holder)
     }
 
-    override fun setNewData(data: MutableList<M>?) {
+    override fun setNewData(data: List<M>?) {
         super.setNewData(data)
         checkEmpty()
     }

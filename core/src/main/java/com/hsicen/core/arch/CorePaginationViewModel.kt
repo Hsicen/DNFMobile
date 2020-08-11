@@ -1,12 +1,7 @@
 package com.hsicen.core.arch
 
 
-import android.annotation.SuppressLint
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.*
 import com.hsicen.core.GlobalConfigs
 import com.hsicen.core.arch.CorePaginationViewModel.Companion.START_PAGE_NUMBER
 import com.hsicen.core.arch.adapter.CoreRvAdapter
@@ -228,11 +223,11 @@ fun <T : Any> LiveData<CorePaginationViewModel.PaginationState<T>>.applyTo(
     })
 }
 
-fun <T : Any> CorePaginationViewModel.PaginationState<T>.applyTo(swipeRefreshLayout: KSwipeRefreshLayout) {
+/*fun <T : Any> CorePaginationViewModel.PaginationState<T>.applyTo(swipeRefreshLayout: KSwipeRefreshLayout) {
     // 如果是缓存读取状态不取消加载状态
     if (this.state != LoadState.Loading && !fromCache) {
         swipeRefreshLayout.isRefreshing = false
     } else if (this.state == LoadState.Loading && this.pageNumber == START_PAGE_NUMBER) {
         swipeRefreshLayout.isRefreshing = true
     }
-}
+}*/

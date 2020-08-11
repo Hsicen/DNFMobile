@@ -87,7 +87,7 @@ object KToast {
     /**兼容部分手机toast不兼容问题
      * @param toast
      */
-    @SuppressLint("PrivateApi", "DiscouragedPrivateApi")
+    @SuppressLint("PrivateApi", "DiscouragedPrivateApi", "SoonBlockedPrivateApi")
     fun showSystemToast(toast: Toast?) {
         runCatching {
             val serviceMethod = Toast::class.java.getDeclaredMethod("getService")
