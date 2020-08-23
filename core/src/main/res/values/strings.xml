@@ -40,6 +40,7 @@
     <string name="msg_storage_permission_revoked">未开启文件读写权限，请在设置中打开对应权限</string>
     <string name="msg_camera_permission_revoked">未开启相机权限，请在设置中打开对应权限</string>
 
-    <string name="img_desc">图片</string>
+    <!--Image description-->
+    <string name="img_desc">hsiceni@gmail.com</string>
 
 </resources>

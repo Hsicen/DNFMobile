@@ -12,8 +12,23 @@ subprojects {
     }
 
     apply plugin: 'kotlin-android'
-    apply plugin: 'kotlin-android-extensions'
+    if (projectName != "extensions") {
+        apply plugin: 'kotlin-android-extensions'
+        apply plugin: 'kotlin-kapt'
 
+        kapt {
+            // 开启编译缓存
+            useBuildCache = true
+        }
+
+        // 添加动态依赖
+        dependencies {
+            kapt Deps.daggerKapt
+            kapt Deps.daggerAndroidKapt
+        }
+    }
+
+    //公共依赖配置
     apply from: '../core_dependencies.gradle'
     apply from: '../test_dependencies.gradle'
     apply from: '../repositories.gradle'

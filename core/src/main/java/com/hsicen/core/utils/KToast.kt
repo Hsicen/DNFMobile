@@ -63,7 +63,7 @@ object KToast {
                 this.duration = duration
                 view?.tv_toast_message?.text = message
             } ?: Toast(context).apply {
-                this.view = context.inflate(R.layout.k_toast_default)
+                this.view = context.inflate(R.layout.toast_default)
                 this.duration = duration
                 view?.tv_toast_message?.text = message
                 this@KToast.toast = this

@@ -248,6 +248,12 @@ class CoreRvAdapter<M : Any>(
             }.no {
                 holder?.setGone(R.id.tv_loading, false)
             }
+
+            (loadMoreStatus != STATUS_END || loadEndText.isNullOrEmpty()).yes {
+                holder?.setGone(R.id.tv_load_more_end, false)
+            }.no {
+                holder?.setGone(R.id.tv_load_more_end, true)
+            }
         }
 
         override fun getLayoutId(): Int = layoutId

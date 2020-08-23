@@ -35,6 +35,7 @@ object Versions {
     const val logger = "2.2.0"
     const val adapterHelper = "2.9.45-androidx"
     const val glide = "4.8.0"
+    const val dagger = "2.28.3"
 
 
     //Test version
@@ -51,7 +52,7 @@ object Deps {
     const val coreKtx = "androidx.core:core-ktx:${Versions.ktx}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val constraintLayout =
-            "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val material = "com.google.android.material:material:${Versions.material}"
 
     //日志打印
@@ -59,7 +60,7 @@ object Deps {
 
     //Adapter
     const val adapterHelper =
-            "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.adapterHelper}"
+        "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.adapterHelper}"
 
     //Glide
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
@@ -68,8 +69,14 @@ object Deps {
 
     //coroutines
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-    const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val coroutinesAndroid =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
+    //dagger
+    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
+    const val daggerKapt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val daggerAndroidKapt = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 
     //Test deps
     const val junitJava = "junit:junit:${Versions.junitJava}"

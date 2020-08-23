@@ -93,7 +93,7 @@ class Breadcrumb @JvmOverloads constructor(
         when {
             size > mNumBread -> for (i in mNumBread until size) {
                 val itemView =
-                    LayoutInflater.from(context).inflate(R.layout.layout_bread_crumb, null)
+                    LayoutInflater.from(context).inflate(R.layout.bread_crumb, null)
                 val tv = itemView.findViewById(R.id.tv_content) as TextView
                 val split = itemView.findViewById(R.id.tv_split) as TextView
                 tv.text = mData[i]
