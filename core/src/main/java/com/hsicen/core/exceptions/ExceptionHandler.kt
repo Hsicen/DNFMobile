@@ -26,30 +26,33 @@ import java.net.SocketTimeoutException
  * @param default ((Exception) -> Boolean)?
  */
 fun Throwable?.handleForNetwork(
-    clazz: Class<*>? = null,
-    default: ((Throwable) -> Boolean)? = null
+  clazz: Class<*>? = null,
+  default: ((Throwable) -> Boolean)? = null
 ) {
-    when (this) {
-        is Response.Exception -> {
-            // 会话过期不提示
-            (this.response.code == ServerCodes.TOKEN_EXPIRED).no {
-                info(this.message ?: "")
-            }
-        }
-        is SocketException,
-        is SocketTimeoutException,
-        is HttpException -> {
-            info(GlobalContext.getContext().getString(R.string.error_not_network))
-        }
-        is CancellationException -> {
-        }
-        else -> {
-            if (default?.invoke(this ?: return) != true) {
-                info(GlobalContext.getContext().getString(R.string.error_not_network))
-            }
-        }
+  when (this) {
+    is Response.Exception -> {
+      // 会话过期不提示
+      (this.response.code == ServerCodes.TOKEN_EXPIRED).no {
+        info(this.message ?: "")
+      }
     }
-    handle(clazz)
+    is SocketException,
+    is SocketTimeoutException,
+    is HttpException -> {
+      info(GlobalContext.getContext().getString(R.string.error_not_network))
+    }
+
+    is CancellationException -> {
+
+    }
+
+    else -> {
+      if (default?.invoke(this ?: return) != true) {
+        info(GlobalContext.getContext().getString(R.string.error_not_network))
+      }
+    }
+  }
+  handle(clazz)
 }
 
 /**
@@ -58,9 +61,9 @@ fun Throwable?.handleForNetwork(
  * @param clazz
  */
 fun Throwable?.handle(clazz: Class<*>? = null) {
-    if (clazz == null) {
-        Logger.e(this, "${this?.message}")
-    } else {
-        Logger.e(this, "${this?.message}  -->  ${clazz.name}")
-    }
+  if (clazz == null) {
+    Logger.e(this, "${this?.message}")
+  } else {
+    Logger.e(this, "${this?.message}  -->  ${clazz.name}")
+  }
 }

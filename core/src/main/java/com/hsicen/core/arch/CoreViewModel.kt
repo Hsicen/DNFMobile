@@ -18,21 +18,21 @@ import kotlin.coroutines.CoroutineContext
  */
 abstract class CoreViewModel : ViewModel(), CoroutineScope {
 
-    private val rootJob = Job()
+  private val rootJob = Job()
 
-    override val coroutineContext: CoroutineContext
-        get() = CoroutinesDispatchers.ui + rootJob
+  override val coroutineContext: CoroutineContext
+    get() = CoroutinesDispatchers.ui + rootJob
 
-    /** 加载状态. */
-    protected val _loadingState = MutableLiveData<LoadState>()
-    val loadState: LiveData<LoadState>
-        get() = _loadingState
+  /** 加载状态. */
+  protected val _loadingState = MutableLiveData<LoadState>()
+  val loadState: LiveData<LoadState>
+    get() = _loadingState
 
-    @CallSuper
-    override fun onCleared() {
-        rootJob.cancel()
-        super.onCleared()
-    }
+  @CallSuper
+  override fun onCleared() {
+    rootJob.cancel()
+    super.onCleared()
+  }
 }
 
 /**
@@ -40,24 +40,24 @@ abstract class CoreViewModel : ViewModel(), CoroutineScope {
  */
 sealed class LoadState {
 
-    /**
-     * 加载中.
-     */
-    object Loading : LoadState()
+  /**
+   * 加载中.
+   */
+  object Loading : LoadState()
 
-    /**
-     * 加载完成.
-     * @property data Any 数据.
-     * @constructor
-     */
-    data class Loaded(private val data: Any = Any()) : LoadState() {
-        fun <T> data() = data as T
-    }
+  /**
+   * 加载完成.
+   * @property data Any 数据.
+   * @constructor
+   */
+  data class Loaded(private val data: Any = Any()) : LoadState() {
+    fun <T> data() = data as T
+  }
 
-    /**
-     *  加载失败.
-     * @property exception Exception?
-     * @constructor
-     */
-    data class LoadError(val exception: Throwable? = null) : LoadState()
+  /**
+   *  加载失败.
+   * @property exception Exception?
+   * @constructor
+   */
+  data class LoadError(val exception: Throwable? = null) : LoadState()
 }

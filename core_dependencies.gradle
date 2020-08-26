@@ -39,6 +39,8 @@ dependencies {
 
     //Dagger2
     implementation Deps.dagger
-    implementation Deps.daggerAndroid
+    implementation(Deps.daggerAndroid) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 
 }

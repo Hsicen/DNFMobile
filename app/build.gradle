@@ -1,5 +1,4 @@
 //其它公共配置在module_config.gradle 文件中
-
 android {
     defaultConfig {
         applicationId "com.hsicen.dnfmobile"

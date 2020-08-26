@@ -22,61 +22,61 @@ class LoadingDialog private constructor(
     private val builder: Builder
 ) : AlertDialog(context, R.style.Loading) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val root = context.inflate(R.layout.dialog_loading)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val root = context.inflate(R.layout.dialog_loading)
 
-        // activity设置了content transition属性 这里会抛转transitionManager空指针异常 这里做法是new一个新的
-        runCatching {
-            if (window?.transitionManager == null) {
-                window?.transitionManager = TransitionManager()
-            }
+    // activity设置了content transition属性 这里会抛转transitionManager空指针异常 这里做法是new一个新的
+    runCatching {
+      if (window?.transitionManager == null) {
+        window?.transitionManager = TransitionManager()
+      }
 
-            window?.setContentView(root)
-        }.onFailure {
-            Logger.e(it, "默认加载弹窗")
-        }
-        setContentView(R.layout.dialog_loading)
-
-        setCancelable(builder.isCancelable)
-        setCanceledOnTouchOutside(builder.isCanceledOnTouchOutside)
-
-        Glide.with(root.ivLoading)
-            .asGif()
-            .load(R.drawable.gif_loading)
-            .into(root.ivLoading)
+      window?.setContentView(root)
+    }.onFailure {
+      Logger.e(it, "默认加载弹窗")
     }
+    setContentView(R.layout.dialog_loading)
 
-    class Builder {
-        var isCancelable = false
-        var isCanceledOnTouchOutside = false
-    }
+    setCancelable(builder.isCancelable)
+    setCanceledOnTouchOutside(builder.isCanceledOnTouchOutside)
 
-    companion object {
-        /**
-         * 显示.
-         * @param context Context
-         * @param builder (Builder.() -> Unit)?
-         * @return KLoadingDialog
-         */
-        fun show(context: Context, builder: (Builder.() -> Unit)? = null): LoadingDialog =
-            LoadingDialog(context, Builder().apply { builder?.invoke(this) }).apply {
-                show()
-            }
+    Glide.with(root.ivLoading)
+      .asGif()
+      .load(R.drawable.gif_loading)
+      .into(root.ivLoading)
+  }
 
-        /**
-         * 显示.
-         * @param fragment Fragment
-         * @param builder (Builder.() -> Unit)?
-         * @return KLoadingDialog?
-         */
-        fun show(fragment: Fragment, builder: (Builder.() -> Unit)? = null): LoadingDialog? =
-            fragment.activity?.let { show(it, builder) }
-    }
+  class Builder {
+    var isCancelable = false
+    var isCanceledOnTouchOutside = false
+  }
+
+  companion object {
+    /**
+     * 显示.
+     * @param context Context
+     * @param builder (Builder.() -> Unit)?
+     * @return KLoadingDialog
+     */
+    fun show(context: Context, builder: (Builder.() -> Unit)? = null): LoadingDialog =
+      LoadingDialog(context, Builder().apply { builder?.invoke(this) }).apply {
+        show()
+      }
+
+    /**
+     * 显示.
+     * @param fragment Fragment
+     * @param builder (Builder.() -> Unit)?
+     * @return KLoadingDialog?
+     */
+    fun show(fragment: Fragment, builder: (Builder.() -> Unit)? = null): LoadingDialog? =
+      fragment.activity?.let { show(it, builder) }
+  }
 }
 
 fun Context.showLoading(builder: (LoadingDialog.Builder.() -> Unit)? = null): LoadingDialog =
-    LoadingDialog.show(this, builder)
+  LoadingDialog.show(this, builder)
 
 fun Fragment.showLoading(builder: (LoadingDialog.Builder.() -> Unit)? = null): LoadingDialog? =
-    LoadingDialog.show(this, builder)
+  LoadingDialog.show(this, builder)
