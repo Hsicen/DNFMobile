@@ -1,9 +1,15 @@
 package com.hsicen.core
 
+import android.app.Activity
+import android.content.pm.ApplicationInfo
+import androidx.fragment.app.Fragment
 import androidx.multidex.MultiDexApplication
+import com.hsicen.core.dagger.android.HasActivityInjector
+import com.hsicen.core.dagger.android.HasFragmentInjector
+import dagger.Lazy
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import leakcanary.ObjectWatcher
 import javax.inject.Inject
 
 /**
@@ -14,15 +20,34 @@ import javax.inject.Inject
  *
  * 支持MultiDex.
  */
-open class CoreApplication : MultiDexApplication(), HasAndroidInjector {
+open class CoreApplication : MultiDexApplication(), HasActivityInjector, HasFragmentInjector {
 
-    @Inject
-    lateinit var dispatchAndroidInjector: DispatchingAndroidInjector<Any>
+  /** Activity注入器. */
+  @Inject
+  lateinit var actInjector: Lazy<DispatchingAndroidInjector<Activity>>
 
-    override fun androidInjector(): AndroidInjector<Any> {
+  /** Fragment注入器. */
+  @Inject
+  lateinit var frgInjector: Lazy<DispatchingAndroidInjector<Fragment>>
 
-        return dispatchAndroidInjector
-    }
+  /** 对象引用监测器. */
+  protected var refWatcher: ObjectWatcher? = null
 
+  /** 调试模式是否开启. */
+  protected val isDebug: Boolean by lazy(LazyThreadSafetyMode.NONE) { isDebugMode() }
+
+  override fun activityInjector(): AndroidInjector<Activity> = actInjector.get()
+
+  override fun fragmentInjector(): AndroidInjector<Fragment> = frgInjector.get()
+
+  /**
+   * 是否是debug模式.
+   * @return Boolean
+   */
+  private fun isDebugMode(): Boolean =
+    runCatching {
+      val info = applicationInfo
+      info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+    }.getOrNull() ?: false
 
 }

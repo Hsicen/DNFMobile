@@ -1,46 +1,64 @@
 //公共依赖库
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+  implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    //官方系统库
-    implementation Deps.kotlinStdLib
-    implementation Deps.coreKtx
-    implementation Deps.appcompat
-    implementation Deps.constraintLayout
-    implementation Deps.material
+  //官方系统库
+  implementation Deps.kotlinStdLib
+  implementation Deps.coreKtx
+  implementation Deps.appcompat
+  implementation Deps.constraintLayout
+  implementation Deps.material
 
-    //协程
-    implementation Deps.coroutines
-    implementation Deps.coroutinesAndroid
+  //协程
+  implementation Deps.coroutines
+  implementation Deps.coroutinesAndroid
 
-    //日志打印
-    implementation Deps.logger
+  //日志打印
+  implementation Deps.logger
 
-    //AdapterHelper
-    implementation Deps.adapterHelper //后期替换成最新的3.0.4
+  //AdapterHelper 后期替换成最新的3.0.4
+  implementation Deps.adapterHelper
 
-    //Glide 最新版本替换 和 统一封装
-    implementation Deps.glide
-    implementation Deps.glideOkHttp
-    implementation Deps.glideRV
+  //Glide 最新版本替换 和 统一封装
+  implementation Deps.glide
+  implementation Deps.glideOkHttp
+  implementation Deps.glideRV
 
-    //Jetpack Navigation 组件
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+  //Jetpack Navigation 组件
+  implementation Deps.navigation
+  implementation Deps.navigationKtx
 
-    //Gson数据格式
-    implementation 'com.google.code.gson:gson:2.8.6'
+  //Gson数据格式
+  implementation Deps.gson
 
-    //Logger日志
-    implementation 'com.orhanobut:logger:2.2.0'
+  //Logger日志
+  implementation Deps.logger
 
-    //Multi Dex
-    implementation 'androidx.multidex:multidex:2.0.1'
+  //Multi Dex
+  implementation Deps.multiDex
 
-    //Dagger2
-    implementation Deps.dagger
-    implementation(Deps.daggerAndroid) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
+  //Dagger2
+  implementation Deps.dagger
+  implementation(Deps.daggerAndroid) {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
 
+  //LeakCanary
+  debugImplementation Deps.leakCanaryDebug
+  releaseImplementation Deps.leakCanaryRelease
+
+  //Retrofit
+  implementation Deps.retrofit
+  implementation Deps.retrofitGson
+
+  //OkHttp
+  implementation Deps.okHttp
+  implementation Deps.okHttpLogInterceptor
+  implementation(Deps.okHttpUrlConnection) {
+    exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+  }
+
+  //Room
+  implementation Deps.room
+  implementation Deps.roomKtx
 }

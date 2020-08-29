@@ -2,55 +2,56 @@
 //可以在这里做公共配置，特殊配置可以在每个Module的 build.gradle 文件中单独指定
 
 subprojects {
-    def projectName = project.name
-    def isApp = projectName == "app"
+  def projectName = project.name
+  def isApp = projectName == "app"
 
-    if (isApp) {
-        apply plugin: 'com.android.application'
-    } else {
-        apply plugin: 'com.android.library'
+  if (isApp) {
+    apply plugin: 'com.android.application'
+  } else {
+    apply plugin: 'com.android.library'
+  }
+
+  apply plugin: 'kotlin-android'
+  if (projectName != "extensions") {
+    apply plugin: 'kotlin-android-extensions'
+    apply plugin: 'kotlin-kapt'
+
+    kapt {
+      // 开启编译缓存
+      useBuildCache = true
     }
 
-    apply plugin: 'kotlin-android'
-    if (projectName != "extensions") {
-        apply plugin: 'kotlin-android-extensions'
-        apply plugin: 'kotlin-kapt'
+    // 添加动态依赖
+    dependencies {
+      kapt Deps.daggerApt
+      kapt Deps.daggerAndroidApt
+      kapt Deps.roomApt
+    }
+  }
 
-        kapt {
-            // 开启编译缓存
-            useBuildCache = true
-        }
+  //公共依赖配置
+  apply from: '../repositories.gradle'
+  apply from: '../core_dependencies.gradle'
+  apply from: '../test_dependencies.gradle'
 
-        // 添加动态依赖
-        dependencies {
-            kapt Deps.daggerKapt
-            kapt Deps.daggerAndroidKapt
-        }
+  android {
+    compileSdkVersion Versions.compileSDK
+    buildToolsVersion Versions.buildTools
+
+    defaultConfig {
+      minSdkVersion Versions.minSDK
+      targetSdkVersion Versions.targetSDK
+      versionCode Versions.versionCode
+      versionName Versions.versionName
     }
 
-    //公共依赖配置
-    apply from: '../core_dependencies.gradle'
-    apply from: '../test_dependencies.gradle'
-    apply from: '../repositories.gradle'
-
-    android {
-        compileSdkVersion Versions.compileSDK
-        buildToolsVersion Versions.buildTools
-
-        defaultConfig {
-            minSdkVersion Versions.minSDK
-            targetSdkVersion Versions.targetSDK
-            versionCode Versions.versionCode
-            versionName Versions.versionName
-        }
-
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
-
-        kotlinOptions {
-            jvmTarget = '1.8'
-        }
+    compileOptions {
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+      jvmTarget = '1.8'
+    }
+  }
 }

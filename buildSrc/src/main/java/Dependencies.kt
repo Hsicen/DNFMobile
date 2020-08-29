@@ -7,79 +7,112 @@
 
 //统一管理项目中的版本信息
 object Versions {
-    //Build Configs
-    const val minSDK = 21
-    const val compileSDK = 30
-    const val targetSDK = 30
-    const val buildTools = "30.0.0"
+  //Build Configs
+  const val minSDK = 21
+  const val compileSDK = 30
+  const val targetSDK = 30
+  const val buildTools = "30.0.0"
 
-    //App Version
-    const val versionCode = 1
-    const val versionName = "1.0.0"
+  //App Version
+  const val versionCode = 1
+  const val versionName = "1.0.0"
 
-    //Plugins
-    const val buildGradle = "4.0.1"
+  //Plugins
+  const val buildGradle = "4.0.1"
 
-    //kotlin
-    const val kotlinVersion = "1.3.72"
+  //kotlin
+  const val kotlinVersion = "1.4.0"
 
-    //官方库
-    const val ktx = "1.3.1"
-    const val appcompat = "1.1.0"
-    const val constraintLayout = "1.1.3"
-    const val coroutines = "1.3.5"
-    const val material = "1.1.0"
-
-
-    //三方库
-    const val logger = "2.2.0"
-    const val adapterHelper = "2.9.45-androidx"
-    const val glide = "4.8.0"
-    const val dagger = "2.28.3"
+  //官方库
+  const val ktx = "1.3.1"
+  const val appcompat = "1.1.0"
+  const val constraintLayout = "1.1.3"
+  const val coroutines = "1.3.5"
+  const val material = "1.1.0"
 
 
-    //Test version
-    const val junitJava = "4.13"
-    const val junitAndroid = "1.1.1"
-    const val espresso = "3.2.0"
+  //三方库
+  const val logger = "2.2.0"
+  const val adapterHelper = "2.9.45-androidx"
+  const val glide = "4.8.0"
+  const val dagger = "2.28.3"
+  const val leakCanary = "2.4"
+  const val room = "2.2.5"
+  const val navigation = "2.3.0"
+  const val gson = "2.8.6"
+  const val multiDex = "2.0.1"
+  const val retrofit = "2.9.0"
+  const val okHttp = "4.8.1"
+
+
+  /*** =========测试模块 Version=========***/
+  const val junitJava = "4.13"
+  const val junitAndroid = "1.1.1"
+  const val espresso = "3.2.0"
 }
 
 
 //统一管理项目中使用的依赖库
 object Deps {
-    //官方系统库
-    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
-    const val coreKtx = "androidx.core:core-ktx:${Versions.ktx}"
-    const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
-    const val constraintLayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    const val material = "com.google.android.material:material:${Versions.material}"
+  //官方系统库
+  const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
+  const val coreKtx = "androidx.core:core-ktx:${Versions.ktx}"
+  const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
+  const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+  const val material = "com.google.android.material:material:${Versions.material}"
 
-    //日志打印
-    const val logger = "com.orhanobut:logger:${Versions.logger}"
+  //日志打印
+  const val logger = "com.orhanobut:logger:${Versions.logger}"
 
-    //Adapter
-    const val adapterHelper =
-        "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.adapterHelper}"
+  //Adapter
+  const val adapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.adapterHelper}"
 
-    //Glide
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
-    const val glideOkHttp = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
-    const val glideRV = "com.github.bumptech.glide:recyclerview-integration:${Versions.glide}"
+  //Glide
+  const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+  const val glideOkHttp = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
+  const val glideRV = "com.github.bumptech.glide:recyclerview-integration:${Versions.glide}"
 
-    //coroutines
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-    const val coroutinesAndroid =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+  //coroutines
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+  const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
-    //dagger
-    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
-    const val daggerKapt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-    const val daggerAndroidKapt = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
+  //dagger
+  const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+  const val daggerApt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+  const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
+  const val daggerAndroidApt = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 
-    //Test deps
-    const val junitJava = "junit:junit:${Versions.junitJava}"
-    const val junitAndroid = "androidx.test.ext:junit:${Versions.junitAndroid}"
-    const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+  //LeakCanary
+  const val leakCanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
+  const val leakCanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:${Versions.leakCanary}"
+
+  //Room
+  const val room = "androidx.room:room-runtime:${Versions.room}"
+  const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+  const val roomApt = "androidx.room:room-compiler:${Versions.room}"
+
+  //Navigation
+  const val navigation = "androidx.navigation:navigation-fragment:${Versions.navigation}"
+  const val navigationKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+
+  //Gson
+  const val gson = "com.google.code.gson:gson:${Versions.gson}"
+
+  //MultiDex
+  const val multiDex = "androidx.multidex:multidex:${Versions.multiDex}"
+
+  //Retrofit
+  const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+  const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+
+  //OkHttp
+  const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+  const val okHttpUrlConnection = "com.squareup.okhttp3:okhttp-urlconnection:${Versions.okHttp}"
+  const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+
+
+  /*** =========测试模块依赖=========***/
+  const val junitJava = "junit:junit:${Versions.junitJava}"
+  const val junitAndroid = "androidx.test.ext:junit:${Versions.junitAndroid}"
+  const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 }
