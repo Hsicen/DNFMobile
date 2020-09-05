@@ -132,9 +132,9 @@ fun <T> safetyComputation(block: suspend CoroutineScope.() -> T): JobWrapper {
  * @return JobWrapper
  */
 fun CoroutineScope.safetyLaunch(
-    context: CoroutineContext = EmptyCoroutineContext,
-    start: CoroutineStart = CoroutineStart.DEFAULT,
-    block: suspend CoroutineScope.() -> Unit
+  context: CoroutineContext = EmptyCoroutineContext,
+  start: CoroutineStart = CoroutineStart.DEFAULT,
+  block: suspend CoroutineScope.() -> Unit
 ): JobWrapper {
   val jobWrapper = JobWrapper()
   jobWrapper.job = launch(context, start) {

@@ -7,6 +7,7 @@ import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.facade.template.IProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hsicen.core.BuildConfig
+import com.hsicen.core.data.Codes
 import com.hsicen.core.utils.toast.debugInfo
 import com.orhanobut.logger.Logger
 
@@ -20,11 +21,10 @@ import com.orhanobut.logger.Logger
  */
 object ARouters {
 
-  /**
-   * module bizMain
-   */
+  /*** 主页面*/
   object Main {
     const val MAIN = "/main/main"
+    const val MINE = "/main/mine"
 
     /**
      * 获取后台接口地址
@@ -33,7 +33,6 @@ object ARouters {
     fun getHttpServerHost(): String {
       return BuildConfig.HTTP_SERVER_URL
     }
-
   }
 
   /**
@@ -43,7 +42,11 @@ object ARouters {
   fun getPathByCode(code: String?): String? {
     code ?: return null
 
-    return ""
+    return when (code) {
+      Codes.MAIN -> Main.MAIN
+      Codes.MINE -> Main.MINE
+      else -> null
+    }
   }
 }
 

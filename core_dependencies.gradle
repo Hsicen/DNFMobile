@@ -26,6 +26,7 @@ dependencies {
 
   //Jetpack Navigation 组件
   implementation Deps.navigation
+  implementation Deps.navigationUi
   implementation Deps.navigationKtx
 
   //Gson数据格式
@@ -72,4 +73,15 @@ dependencies {
 
   //ARouter
   implementation Deps.aRouter
+
+  //Smart Refresh
+  implementation Deps.smartRefresh
+  implementation Deps.smartRefreshHeader
+  implementation Deps.smartRefreshFooter
+
+  //LifeCycle
+  implementation Deps.lifeCycleExtensions
+  implementation Deps.lifeCycleViewModel
+  implementation Deps.lifeCycleViewModelKtx
+  implementation Deps.lifeCycleViewModelSavedState
 }

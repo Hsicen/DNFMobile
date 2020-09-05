@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.hsicen.core.coreComponent
 import com.hsicen.extensions.extensions.forbidScroll
 import com.hsicen.extensions.extensions.hideKeyboard
 import com.hsicen.extensions.extensions.no
@@ -22,69 +23,75 @@ import com.hsicen.extensions.extensions.yes
  */
 abstract class CoreBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
-    /** 布局文件id. */
-    @get: LayoutRes
-    protected abstract val layoutId: Int
+  /** 布局文件id. */
+  @get: LayoutRes
+  protected abstract val layoutId: Int
 
-    /** View是否已经创建. */
-    protected var isViewCreated = false
+  /** View是否已经创建. */
+  protected var isViewCreated = false
 
-    /** 根布局. */
-    protected var root: View? = null
+  /** 根布局. */
+  protected var root: View? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        (root != null).yes {
-            (root?.parent as? ViewGroup)?.removeView(root)
-        }.no {
-            root = inflater.inflate(layoutId, container, false)
-        }
-        return root
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    (root != null).yes {
+      (root?.parent as? ViewGroup)?.removeView(root)
+    }.no {
+      root = inflater.inflate(layoutId, container, false)
     }
+    return root
+  }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
 
-        if (savedInstanceState != null) {
-            val dialogState = savedInstanceState.getBundle("android:savedDialogState")
-            if (dialogState != null) {
-                dialog?.onRestoreInstanceState(dialogState)
-            }
-        }
+    if (savedInstanceState != null) {
+      val dialogState = savedInstanceState.getBundle("android:savedDialogState")
+      if (dialogState != null) {
+        dialog?.onRestoreInstanceState(dialogState)
+      }
     }
+  }
 
-    @CallSuper
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        isViewCreated.no {
-            onInit(savedInstanceState)
-        }
-        isViewCreated = true
-        forbidScroll()
+  @CallSuper
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    isViewCreated.no {
+      onInit(savedInstanceState)
     }
+    isViewCreated = true
+    forbidScroll()
+  }
 
-    @CallSuper
-    override fun onDestroyView() {
-        isViewCreated = false
-        dialog?.setOnCancelListener(null)
-        dialog?.setOnDismissListener(null)
-        super.onDestroyView()
-        hideKeyboard()
-    }
+  @CallSuper
+  override fun onDestroyView() {
+    isViewCreated = false
+    dialog?.setOnCancelListener(null)
+    dialog?.setOnDismissListener(null)
+    super.onDestroyView()
+    hideKeyboard()
+  }
 
-    /**
-     * 初始化.
-     */
-    abstract fun onInit(savedInstanceState: Bundle?)
+  override fun onDestroy() {
+    super.onDestroy()
 
-    /**
-     * LiveData 扩展.
-     * @receiver LiveData<T>
-     * @param block (data: T) -> Unit
-     */
-    infix fun <T> LiveData<T>.observe(block: (data: T) -> Unit) =
-        this.observe(this@CoreBottomSheetDialogFragment, Observer { block.invoke(it) })
+    activity?.coreComponent()?.refWatcher()?.watch(this, "${this::class.simpleName} was detached")
+  }
+
+  /**
+   * 初始化.
+   */
+  abstract fun onInit(savedInstanceState: Bundle?)
+
+  /**
+   * LiveData 扩展.
+   * @receiver LiveData<T>
+   * @param block (data: T) -> Unit
+   */
+  infix fun <T> LiveData<T>.observe(block: (data: T) -> Unit) =
+    this.observe(this@CoreBottomSheetDialogFragment, Observer { block.invoke(it) })
 }

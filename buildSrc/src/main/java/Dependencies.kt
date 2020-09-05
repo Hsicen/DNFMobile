@@ -48,6 +48,8 @@ object Versions {
   const val aRouter = "1.5.0"
   const val aRouterCompile = "1.2.2"
   const val aRouterRegister = "1.0.2"
+  const val smartRefresh = "2.0.1"
+  const val lifeCycle = "2.2.0"
 
 
   /*** =========测试模块 Version=========***/
@@ -98,6 +100,7 @@ object Deps {
 
   //Navigation
   const val navigation = "androidx.navigation:navigation-fragment:${Versions.navigation}"
+  const val navigationUi = "androidx.navigation:navigation-ui:${Versions.navigation}"
   const val navigationKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
 
   //Gson
@@ -126,6 +129,17 @@ object Deps {
   //ARouter
   const val aRouter = "com.alibaba:arouter-api:${Versions.aRouter}"
   const val aRouterCompile = "com.alibaba:arouter-compiler:${Versions.aRouterCompile}"
+
+  //Smart Refresh
+  const val smartRefresh = "com.scwang.smart:refresh-layout-kernel:${Versions.smartRefresh}"
+  const val smartRefreshHeader = "com.scwang.smart:refresh-header-classics:${Versions.smartRefresh}"
+  const val smartRefreshFooter = "com.scwang.smart:refresh-footer-classics:${Versions.smartRefresh}"
+
+  //LifeCycle
+  const val lifeCycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifeCycle}"
+  const val lifeCycleViewModel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.lifeCycle}"
+  const val lifeCycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifeCycle}"
+  const val lifeCycleViewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifeCycle}"
 
   /*** =========测试模块依赖=========***/
   const val junitJava = "junit:junit:${Versions.junitJava}"

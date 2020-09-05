@@ -1,32 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- =======Dialog主题======= -->
-    <style name="Dialog" parent="Theme.AppCompat.Light.Dialog" />
+  <!-- =======Dialog主题======= -->
+  <style name="Dialog" parent="Theme.AppCompat.Light.Dialog" />
 
-    <style name="Dialog.Default">
-        <item name="android:windowAnimationStyle">@style/DialogAnimDefault</item>
-    </style>
+  <style name="Dialog.Default">
+    <item name="android:windowAnimationStyle">@style/DialogAnimDefault</item>
+  </style>
 
-    <style name="Dialog.Default.Transparent">
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
+  <style name="Dialog.Default.Transparent">
+    <item name="android:windowBackground">@android:color/transparent</item>
+  </style>
 
-    <!--动画配置-->
-    <style name="DialogAnimDefault" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
-        <item name="android:windowExitAnimation">@anim/dialog_out</item>
-    </style>
+  <!--动画配置-->
+  <style name="DialogAnimDefault" parent="android:Animation">
+    <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+    <item name="android:windowExitAnimation">@anim/dialog_out</item>
+  </style>
 
-    <!-- 默认Loading弹窗-->
-    <style name="Loading" parent="AlertDialog.AppCompat.Light">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
+  <!-- 默认Loading弹窗-->
+  <style name="Loading" parent="AlertDialog.AppCompat.Light">
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:windowIsTranslucent">false</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:backgroundDimEnabled">false</item>
+  </style>
 
+  <!--=====广告弹窗主题=====-->
+  <style name="KDialog" />
+
+  <style name="KDialog.Title">
+    <item name="android:textSize">@dimen/font_z7</item>
+    <item name="android:textColor">@color/font_g2</item>
+  </style>
+
+  <style name="KDialog.Message">
+    <item name="android:textSize">@dimen/font_z5</item>
+    <item name="android:textColor">@color/font_g3</item>
+  </style>
+
+  <style name="KDialog.Button" parent="Widget.AppCompat.Button.Borderless.Colored">
+    <item name="android:textSize">@dimen/font_z4</item>
+    <item name="android:textColor">@color/k_accent</item>
+  </style>
+
+  <style name="KDialog.Button.Negative" parent="Widget.AppCompat.Button.Borderless.Colored">
+    <item name="android:textSize">@dimen/font_z4</item>
+    <item name="android:textColor">@color/font_g4</item>
+  </style>
 
 </resources>

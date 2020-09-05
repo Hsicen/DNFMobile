@@ -6,11 +6,16 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import androidx.annotation.CallSuper
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
+import androidx.navigation.Navigator
+import com.hsicen.core.coreComponent
 import com.hsicen.core.exceptions.handleForNetwork
 import com.hsicen.core.ui.loading.LoadingDialog
 import com.hsicen.core.ui.loading.showLoading
@@ -53,26 +58,14 @@ abstract class CoreActivity(
     initData()
   }
 
-  /**
-   * 初始化Intent数据
-   */
-  protected open fun initVariable() {
+  /*** 初始化Intent数据*/
+  protected open fun initVariable() {}
 
-  }
+  /*** 初始化View*/
+  protected open fun initView() {}
 
-  /**
-   * 初始化View
-   */
-  protected open fun initView() {
-
-  }
-
-  /**
-   * 初始化数据
-   */
-  protected open fun initData() {
-
-  }
+  /*** 初始化数据*/
+  protected open fun initData() {}
 
   override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
     android.R.id.home -> {
@@ -97,7 +90,7 @@ abstract class CoreActivity(
   override fun onDestroy() {
     hideKeyboard()
     super.onDestroy()
-    //coreComponent().refWatcher().watch(this)
+    coreComponent().refWatcher()?.watch(this, "${this::class.simpleName} was detached")
   }
 
   /**
@@ -117,6 +110,32 @@ abstract class CoreActivity(
       return !(ev.x > left && ev.x < right && ev.y > top && ev.y < bottom)
     }
     return false
+  }
+
+  /**
+   * Fragment导航.
+   * @param hostId Int
+   * @param id Int
+   * @param bundle Bundle?
+   * @param navigatorExtras Navigator.Extras?
+   * @param optionsBuilder (NavOptions.Builder.() -> Unit)
+   */
+  fun nav(
+    @IdRes hostId: Int,
+    @IdRes id: Int,
+    bundle: Bundle? = null,
+    navigatorExtras: Navigator.Extras? = null,
+    optionsBuilder: (NavOptions.Builder.() -> Unit) = {}
+  ) {
+    Navigation.findNavController(this, hostId)
+      .navigate(
+        id,
+        bundle,
+        defNavOptions.apply {
+          optionsBuilder.invoke(this)
+        }.build(),
+        navigatorExtras
+      )
   }
 
   /**

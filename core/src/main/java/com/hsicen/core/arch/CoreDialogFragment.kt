@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.hsicen.core.R
+import com.hsicen.core.coreComponent
 import com.hsicen.extensions.extensions.hideKeyboard
 import com.hsicen.extensions.extensions.no
 import com.hsicen.extensions.extensions.yes
@@ -23,67 +24,70 @@ import com.hsicen.extensions.extensions.yes
  */
 abstract class CoreDialogFragment : DialogFragment() {
 
-    /** 布局文件id. */
-    @get: LayoutRes
-    protected abstract val layoutId: Int
+  /** 布局文件id. */
+  @get: LayoutRes
+  protected abstract val layoutId: Int
 
-    /** 根布局. */
-    protected var root: View? = null
+  /** 根布局. */
+  protected var root: View? = null
 
-    /** View是否已经创建. */
-    protected var isViewCreated = false
+  /** View是否已经创建. */
+  protected var isViewCreated = false
 
-    override fun getTheme(): Int = R.style.Dialog_Default_Transparent
+  override fun getTheme(): Int = R.style.Dialog_Default_Transparent
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        (root != null).yes {
-            (root?.parent as? ViewGroup)?.removeView(root)
-        }.no {
-            root = inflater.inflate(layoutId, container, false)
-        }
-        return root
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+  ): View? {
+    (root != null).yes {
+      (root?.parent as? ViewGroup)?.removeView(root)
+    }.no {
+      root = inflater.inflate(layoutId, container, false)
     }
+    return root
+  }
 
-    @CallSuper
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+  @CallSuper
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
 
-        if (savedInstanceState != null) {
-            val dialogState = savedInstanceState.getBundle("android:savedDialogState")
-            if (dialogState != null) {
-                dialog?.onRestoreInstanceState(dialogState)
-            }
-        }
+    if (savedInstanceState != null) {
+      val dialogState = savedInstanceState.getBundle("android:savedDialogState")
+      if (dialogState != null) {
+        dialog?.onRestoreInstanceState(dialogState)
+      }
     }
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        isViewCreated.no {
-            onInit(savedInstanceState)
-        }
-        isViewCreated = true
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    isViewCreated.no {
+      onInit(savedInstanceState)
     }
+    isViewCreated = true
+  }
 
-    @CallSuper
-    override fun onDestroyView() {
-        hideKeyboard()
-        dialog?.setOnCancelListener(null)
-        dialog?.setOnDismissListener(null)
-        super.onDestroyView()
-    }
+  @CallSuper
+  override fun onDestroyView() {
+    hideKeyboard()
+    dialog?.setOnCancelListener(null)
+    dialog?.setOnDismissListener(null)
+    super.onDestroyView()
+  }
 
-    /**
-     * 初始化.
-     */
-    abstract fun onInit(savedInstanceState: Bundle?)
+  override fun onDestroy() {
+    super.onDestroy()
+    activity?.coreComponent()?.refWatcher()?.watch(this, "${this::class.simpleName} was detached")
+  }
 
-    /**
-     * LiveData 扩展.
-     * @receiver LiveData<T>
-     * @param block (data: T) -> Unit
-     */
-    infix fun <T> LiveData<T>.observe(block: (data: T) -> Unit) =
-        this.observe(this@CoreDialogFragment, Observer { block.invoke(it) })
+  /*** 初始化.*/
+  abstract fun onInit(savedInstanceState: Bundle?)
+
+  /**
+   * LiveData 扩展.
+   * @receiver LiveData<T>
+   * @param block (data: T) -> Unit
+   */
+  infix fun <T> LiveData<T>.observe(block: (data: T) -> Unit) =
+    this.observe(this@CoreDialogFragment, Observer { block.invoke(it) })
 }

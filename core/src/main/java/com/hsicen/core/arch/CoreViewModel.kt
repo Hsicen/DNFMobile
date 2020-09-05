@@ -35,14 +35,10 @@ abstract class CoreViewModel : ViewModel(), CoroutineScope {
   }
 }
 
-/**
- * 加载状态.
- */
+/*** 加载状态.*/
 sealed class LoadState {
 
-  /**
-   * 加载中.
-   */
+  /*** 加载中.*/
   object Loading : LoadState()
 
   /**
