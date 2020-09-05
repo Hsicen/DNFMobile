@@ -1,14 +1,14 @@
 //所有repositories配置
 
 repositories {
-    google()
-    jcenter()
-    maven { url "https://jitpack.io" }
+  google()
+  jcenter()
+  maven { url "https://jitpack.io" }
 
-    // 阿里云 mavenCenter镜像
-    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-    // 阿里云 jcenter镜像
-    maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
-    //阿里云maven仓库地址
-    maven { url "https://maven.aliyun.com/nexus/content/repositories/releases" }
+  // 阿里云 mavenCenter镜像
+  maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+  // 阿里云 jcenter镜像
+  maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+  //阿里云maven仓库地址
+  maven { url "https://maven.aliyun.com/nexus/content/repositories/releases" }
 }

@@ -1,7 +1,7 @@
 package com.hsicen.core.data.cache
 
 import com.hsicen.core.data.database.dao.CacheDao
-import com.hsicen.core.data.database.entity.Cache
+import com.hsicen.core.data.model.Cache
 
 /**
  * 作者：hsicen  2020/8/29 23:09

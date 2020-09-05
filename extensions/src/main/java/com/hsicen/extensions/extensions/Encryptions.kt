@@ -20,22 +20,22 @@ import javax.crypto.spec.SecretKeySpec
  * @return String
  */
 fun String.toMd5(charset: String = "utf-8"): String =
-    kotlin.runCatching {
-        val md = MessageDigest.getInstance("MD5")
+  kotlin.runCatching {
+    val md = MessageDigest.getInstance("MD5")
 
-        val byteArray = toByteArray(charset(charset))
-        val md5Bytes = md.digest(byteArray)
+    val byteArray = toByteArray(charset(charset))
+    val md5Bytes = md.digest(byteArray)
 
-        val hexValue = StringBuffer()
-        for (i in md5Bytes.indices) {
-            val value = md5Bytes[i].toInt() and 0xff
-            if (value < 16) {
-                hexValue.append("0")
-            }
-            hexValue.append(Integer.toHexString(value))
-        }
-        hexValue.toString()
-    }.getOrNull() ?: ""
+    val hexValue = StringBuffer()
+    for (i in md5Bytes.indices) {
+      val value = md5Bytes[i].toInt() and 0xff
+      if (value < 16) {
+        hexValue.append("0")
+      }
+      hexValue.append(Integer.toHexString(value))
+    }
+    hexValue.toString()
+  }.getOrNull() ?: ""
 
 /**
  * 字符串sha256加密.
@@ -43,11 +43,11 @@ fun String.toMd5(charset: String = "utf-8"): String =
  * @return String
  */
 fun String.toSha256(): String =
-    kotlin.runCatching {
-        val md = MessageDigest.getInstance("SHA-256")
-        md.update(this.toByteArray())
-        md.digest().toHexString()
-    }.getOrNull() ?: ""
+  kotlin.runCatching {
+    val md = MessageDigest.getInstance("SHA-256")
+    md.update(this.toByteArray())
+    md.digest().toHexString()
+  }.getOrNull() ?: ""
 
 /**
  * 字节数组转base64.
@@ -92,7 +92,7 @@ val AES_ALGORITHM by lazy { "AES/CBC/PKCS5Padding" }
  * @return ByteArray 空则表示加密失败.
  */
 fun String.aesEncrypt(key: String, algorithm: String = AES_ALGORITHM): ByteArray =
-    this.toByteArray().aesEncrypt(key, algorithm)
+  this.toByteArray().aesEncrypt(key, algorithm)
 
 /**
  * AES加密.
@@ -102,19 +102,19 @@ fun String.aesEncrypt(key: String, algorithm: String = AES_ALGORITHM): ByteArray
  * @return ByteArray
  */
 fun ByteArray.aesEncrypt(key: String, algorithm: String = AES_ALGORITHM): ByteArray =
-    kotlin.runCatching {
-        val keyBytes = key.toByteArray()
-        if (keyBytes.size != 16) {
-            throw RuntimeException("Invalid AES key length (must be 16 bytes)")
-        }
-        val secretKey = SecretKeySpec(keyBytes, "AES")
-        val enCodeFormat = secretKey.encoded
-        val seckey = SecretKeySpec(enCodeFormat, "AES")
-        val cipher = Cipher.getInstance(algorithm)
-        val iv = IvParameterSpec(keyBytes)
-        cipher.init(Cipher.ENCRYPT_MODE, seckey, iv)
-        cipher.doFinal(this)
-    }.onFailure { it.printStackTrace() }.getOrNull() ?: byteArrayOf()
+  kotlin.runCatching {
+    val keyBytes = key.toByteArray()
+    if (keyBytes.size != 16) {
+      throw RuntimeException("Invalid AES key length (must be 16 bytes)")
+    }
+    val secretKey = SecretKeySpec(keyBytes, "AES")
+    val enCodeFormat = secretKey.encoded
+    val seckey = SecretKeySpec(enCodeFormat, "AES")
+    val cipher = Cipher.getInstance(algorithm)
+    val iv = IvParameterSpec(keyBytes)
+    cipher.init(Cipher.ENCRYPT_MODE, seckey, iv)
+    cipher.doFinal(this)
+  }.onFailure { it.printStackTrace() }.getOrNull() ?: byteArrayOf()
 
 /**
  * AES解密.
@@ -124,7 +124,7 @@ fun ByteArray.aesEncrypt(key: String, algorithm: String = AES_ALGORITHM): ByteAr
  * @return ByteArray
  */
 fun String.aesDecrypt(key: String, algorithm: String = AES_ALGORITHM): ByteArray =
-    this.toByteArray().aesDecrypt(key, algorithm)
+  this.toByteArray().aesDecrypt(key, algorithm)
 
 /**
  * AES解密.
@@ -134,17 +134,17 @@ fun String.aesDecrypt(key: String, algorithm: String = AES_ALGORITHM): ByteArray
  * @return ByteArray
  */
 fun ByteArray.aesDecrypt(key: String, algorithm: String = AES_ALGORITHM): ByteArray =
-    kotlin.runCatching {
-        if (isEmpty()) return@runCatching null
-        val keyBytes = key.toByteArray()
-        if (keyBytes.size != 16) {
-            throw RuntimeException("Invalid AES key length (must be 16 bytes)")
-        }
-        val secretKey = SecretKeySpec(keyBytes, "AES")
-        val enCodeFormat = secretKey.encoded
-        val seckey = SecretKeySpec(enCodeFormat, "AES")
-        val cipher = Cipher.getInstance(algorithm)
-        val iv = IvParameterSpec(keyBytes)
-        cipher.init(Cipher.DECRYPT_MODE, seckey, iv)
-        cipher.doFinal(this)
-    }.onFailure { it.printStackTrace() }.getOrNull() ?: byteArrayOf()
+  kotlin.runCatching {
+    if (isEmpty()) return@runCatching null
+    val keyBytes = key.toByteArray()
+    if (keyBytes.size != 16) {
+      throw RuntimeException("Invalid AES key length (must be 16 bytes)")
+    }
+    val secretKey = SecretKeySpec(keyBytes, "AES")
+    val enCodeFormat = secretKey.encoded
+    val seckey = SecretKeySpec(enCodeFormat, "AES")
+    val cipher = Cipher.getInstance(algorithm)
+    val iv = IvParameterSpec(keyBytes)
+    cipher.init(Cipher.DECRYPT_MODE, seckey, iv)
+    cipher.doFinal(this)
+  }.onFailure { it.printStackTrace() }.getOrNull() ?: byteArrayOf()

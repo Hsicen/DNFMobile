@@ -1,4 +1,4 @@
-package com.hsicen.core.retrofit
+package com.hsicen.core.net
 
 import retrofit2.Retrofit
 import java.util.concurrent.ConcurrentHashMap

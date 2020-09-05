@@ -4,7 +4,7 @@ import com.bumptech.glide.load.HttpException
 import com.hsicen.core.R
 import com.hsicen.core.data.Response
 import com.hsicen.core.data.ServerCodes
-import com.hsicen.core.utils.KToast.info
+import com.hsicen.core.utils.toast.KToast.info
 import com.hsicen.extensions.extensions.no
 import com.hsicen.extensions.utils.GlobalContext
 import com.orhanobut.logger.Logger

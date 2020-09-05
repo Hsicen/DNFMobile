@@ -1,4 +1,4 @@
-package com.hsicen.core.data.database.entity
+package com.hsicen.core.data.model
 
 import androidx.annotation.Keep
 import androidx.room.ColumnInfo

@@ -1,3 +1,6 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.alibaba.arouter'
+
 //Gradle 编译配置
 buildscript { scriptHandler ->
   apply from: 'repositories.gradle', to: scriptHandler
@@ -6,6 +9,7 @@ buildscript { scriptHandler ->
   dependencies {
     classpath "com.android.tools.build:gradle:$Versions.buildGradle"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$Versions.kotlinVersion"
+    classpath "com.alibaba:arouter-register:${Versions.aRouterRegister}"
   }
 }
 

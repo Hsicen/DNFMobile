@@ -61,4 +61,15 @@ dependencies {
   //Room
   implementation Deps.room
   implementation Deps.roomKtx
+
+  //图片压缩
+  implementation Deps.luBan
+
+  //SharedPreferences delegation library for Kotlin
+  implementation Deps.kotPref
+  implementation Deps.kotPrefEnum
+  implementation Deps.kotPrefGson
+
+  //ARouter
+  implementation Deps.aRouter
 }

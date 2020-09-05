@@ -30,24 +30,24 @@ fun Bitmap.toDrawable() = BitmapDrawable(Resources.getSystem(), this)
  */
 fun drawable2Bitmap(drawable: Drawable): Bitmap {
 
-    if (drawable is BitmapDrawable) {
-        if (drawable.bitmap != null) return drawable.bitmap
-    }
+  if (drawable is BitmapDrawable) {
+    if (drawable.bitmap != null) return drawable.bitmap
+  }
 
-    val mBitmap = if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
-        Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-    } else {
-        Bitmap.createBitmap(
-            drawable.intrinsicWidth,
-            drawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888
-        )
-    }
+  val mBitmap = if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
+    Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+  } else {
+    Bitmap.createBitmap(
+      drawable.intrinsicWidth,
+      drawable.intrinsicHeight,
+      Bitmap.Config.ARGB_8888
+    )
+  }
 
-    val canvas = Canvas(mBitmap)
-    drawable.setBounds(0, 0, canvas.width, canvas.height)
+  val canvas = Canvas(mBitmap)
+  drawable.setBounds(0, 0, canvas.width, canvas.height)
 
-    return mBitmap
+  return mBitmap
 }
 
 
@@ -60,35 +60,35 @@ fun res2Bitmap(resId: Int) = BitmapFactory.decodeResource(Resources.getSystem(),
 
 /***  convert drawable 2 bitmap with specific width*/
 fun res2Bitmap(resId: Int, width: Int): Bitmap {
-    val options = BitmapFactory.Options()
-    options.inJustDecodeBounds = true
-    BitmapFactory.decodeResource(Resources.getSystem(), resId, options)
-    options.inJustDecodeBounds = false
-    options.inDensity = options.outWidth
-    options.inTargetDensity = width
+  val options = BitmapFactory.Options()
+  options.inJustDecodeBounds = true
+  BitmapFactory.decodeResource(Resources.getSystem(), resId, options)
+  options.inJustDecodeBounds = false
+  options.inDensity = options.outWidth
+  options.inTargetDensity = width
 
-    return BitmapFactory.decodeResource(Resources.getSystem(), resId, options)
+  return BitmapFactory.decodeResource(Resources.getSystem(), resId, options)
 }
 
 
 /*** get bitmap from assets with file name*/
 fun getBitmapFromAssets(fileName: String): Bitmap {
-    val assetManager = Resources.getSystem().assets
-    val stream = assetManager.open(fileName)
-    val decodeBitmap = BitmapFactory.decodeStream(stream)
-    stream.close()
+  val assetManager = Resources.getSystem().assets
+  val stream = assetManager.open(fileName)
+  val decodeBitmap = BitmapFactory.decodeStream(stream)
+  stream.close()
 
-    return decodeBitmap
+  return decodeBitmap
 }
 
 
 /*** scale source bitmap with sample bitmap in 1080p screen*/
 fun scaleBitmap(source: Bitmap, sample: Bitmap): Bitmap {
-    val scale = sample.width / 1080f
-    val matrix = Matrix()
-    matrix.postScale(scale, scale)
+  val scale = sample.width / 1080f
+  val matrix = Matrix()
+  matrix.postScale(scale, scale)
 
-    return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
+  return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
 }
 
 
@@ -96,34 +96,34 @@ fun scaleBitmap(source: Bitmap, sample: Bitmap): Bitmap {
  *   src is the bottom layer  upLayer is on the top
  */
 fun Bitmap.composite(upLayer: Bitmap, padLeft: Float, padTop: Float): Bitmap {
-    val newBitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(newBitmap)
-    canvas.drawBitmap(this, 0f, 0f, null)
-    canvas.drawBitmap(upLayer, padLeft, padTop, null)
-    canvas.save()
-    canvas.restore()
+  val newBitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888)
+  val canvas = Canvas(newBitmap)
+  canvas.drawBitmap(this, 0f, 0f, null)
+  canvas.drawBitmap(upLayer, padLeft, padTop, null)
+  canvas.save()
+  canvas.restore()
 
-    return newBitmap
+  return newBitmap
 }
 
 
 /*** save bitmap with specific directory*/
 fun Bitmap.save(childPath: String): String {
-    val bitmapDir = File(Environment.getExternalStorageDirectory(), childPath)
-    if (!bitmapDir.exists()) bitmapDir.mkdir()
+  val bitmapDir = File(Environment.getExternalStorageDirectory(), childPath)
+  if (!bitmapDir.exists()) bitmapDir.mkdir()
 
-    val fileName = System.currentTimeMillis().toString() + ".jpg"
-    val file = File(bitmapDir, fileName)
+  val fileName = System.currentTimeMillis().toString() + ".jpg"
+  val file = File(bitmapDir, fileName)
 
-    val fos = FileOutputStream(file)
-    this.compress(Bitmap.CompressFormat.JPEG, 100, fos)
-    fos.flush()
-    fos.close()
+  val fos = FileOutputStream(file)
+  this.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+  fos.flush()
+  fos.close()
 
-    val path = file.absolutePath
-    this.recycle()
+  val path = file.absolutePath
+  this.recycle()
 
-    return path
+  return path
 }
 
 /**
@@ -135,27 +135,27 @@ fun Bitmap.save(childPath: String): String {
  * @return File?
  */
 inline fun Bitmap.save2File(
-    path: String,
-    format: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG,
-    quality: Int = 100
+  path: String,
+  format: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG,
+  quality: Int = 100
 ): File? =
-    kotlin.runCatching {
-        val bitmapFile = File(path)
-        if (bitmapFile.exists()) {
-            bitmapFile.delete()
-        } else {
-            val folder = File(bitmapFile.parent ?: Environment.getExternalStorageDirectory().path)
-            if (!folder.exists()) {
-                folder.mkdirs()
-            }
-            bitmapFile.createNewFile()
-        }
-        FileOutputStream(bitmapFile).use { out ->
-            compress(format, quality, out)
-        }.let {
-            if (it) bitmapFile else null
-        }
-    }.getOrNull()
+  kotlin.runCatching {
+    val bitmapFile = File(path)
+    if (bitmapFile.exists()) {
+      bitmapFile.delete()
+    } else {
+      val folder = File(bitmapFile.parent ?: Environment.getExternalStorageDirectory().path)
+      if (!folder.exists()) {
+        folder.mkdirs()
+      }
+      bitmapFile.createNewFile()
+    }
+    FileOutputStream(bitmapFile).use { out ->
+      compress(format, quality, out)
+    }.let {
+      if (it) bitmapFile else null
+    }
+  }.getOrNull()
 
 /**
  * Bitmap转输入流.
@@ -163,10 +163,10 @@ inline fun Bitmap.save2File(
  * @return InputStream
  */
 inline fun Bitmap.toInputStream(): InputStream =
-    ByteArrayOutputStream().use {
-        compress(Bitmap.CompressFormat.JPEG, 100, it)
-        ByteArrayInputStream(it.toByteArray())
-    }
+  ByteArrayOutputStream().use {
+    compress(Bitmap.CompressFormat.JPEG, 100, it)
+    ByteArrayInputStream(it.toByteArray())
+  }
 
 /**
  * 转化为白色背景.
@@ -174,11 +174,11 @@ inline fun Bitmap.toInputStream(): InputStream =
  * @return Bitmap
  */
 inline fun Bitmap.withWhiteBg(): Bitmap {
-    val newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(newBitmap)
-    canvas.drawColor(Color.WHITE)
-    canvas.drawBitmap(this, 0f, 0f, Paint())
-    return newBitmap
+  val newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+  val canvas = Canvas(newBitmap)
+  canvas.drawColor(Color.WHITE)
+  canvas.drawBitmap(this, 0f, 0f, Paint())
+  return newBitmap
 }
 
 /**
@@ -186,27 +186,27 @@ inline fun Bitmap.withWhiteBg(): Bitmap {
  */
 val canvas by lazy { Canvas() }
 val paint by lazy {
-    Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        isAntiAlias = true
-    }
+  Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    isAntiAlias = true
+  }
 }
 
 var outBitmap: Bitmap? = null
 inline fun Bitmap?.tintBitmap(color: Int): Bitmap? {
-    this ?: return null
+  this ?: return null
 
-    outBitmap = if (outBitmap == null) {
-        Bitmap.createBitmap(this.width, this.height, this.config)
+  outBitmap = if (outBitmap == null) {
+    Bitmap.createBitmap(this.width, this.height, this.config)
+  } else {
+    // 配置一样就复用.
+    if (this.width == outBitmap!!.width && this.height == outBitmap!!.height && this.config == outBitmap!!.config) {
+      outBitmap
     } else {
-        // 配置一样就复用.
-        if (this.width == outBitmap!!.width && this.height == outBitmap!!.height && this.config == outBitmap!!.config) {
-            outBitmap
-        } else {
-            Bitmap.createBitmap(this.width, this.height, this.config)
-        }
+      Bitmap.createBitmap(this.width, this.height, this.config)
     }
-    canvas.setBitmap(outBitmap)
-    paint.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
-    canvas.drawBitmap(this, 0f, 0f, paint)
-    return outBitmap
+  }
+  canvas.setBitmap(outBitmap)
+  paint.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+  canvas.drawBitmap(this, 0f, 0f, paint)
+  return outBitmap
 }

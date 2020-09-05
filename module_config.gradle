@@ -19,6 +19,10 @@ subprojects {
     kapt {
       // 开启编译缓存
       useBuildCache = true
+      // 设置ARouter模块名
+      arguments {
+        arg("AROUTER_MODULE_NAME", projectName)
+      }
     }
 
     // 添加动态依赖
@@ -26,6 +30,7 @@ subprojects {
       kapt Deps.daggerApt
       kapt Deps.daggerAndroidApt
       kapt Deps.roomApt
+      kapt Deps.aRouterCompile
     }
   }
 
@@ -52,6 +57,16 @@ subprojects {
 
     kotlinOptions {
       jvmTarget = '1.8'
+    }
+
+    if (!isApp) {
+      //渠道配置
+      flavorDimensions "environment"
+      productFlavors {
+        dev {}
+        ts {}
+        prd {}
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.hsicen.core.utils
+package com.hsicen.core.utils.toast
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -55,10 +55,10 @@ object KToast {
    * @param duration Int Toast.LENGTH_SHORT
    */
   fun info(message: String?, duration: Int = Toast.LENGTH_SHORT) {
-    if (message.isNullOrEmpty() || message == this.message) return
+    if (message.isNullOrEmpty() || message == KToast.message) return
     ui {
-      this@KToast.message = message
-      this@KToast.handler.postDelayed(runnable, 1000)
+      KToast.message = message
+      handler.postDelayed(runnable, 1000)
       (toast?.apply {
         this.duration = duration
         view?.tv_toast_message?.text = message
@@ -66,7 +66,7 @@ object KToast {
         this.view = context.inflate(R.layout.toast_default)
         this.duration = duration
         view?.tv_toast_message?.text = message
-        this@KToast.toast = this
+        toast = this
       })
       if (isNotificationEnable(context)) {
         toast?.show()

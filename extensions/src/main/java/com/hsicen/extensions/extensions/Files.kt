@@ -26,86 +26,86 @@ const val EXTENSION_ZIP = "zip"
  * 文件是否有扩展名.
  */
 val File.hasExtension: Boolean
-    get() = this.name.lastIndexOf(".").let { dot ->
-        dot > -1 && dot < this.name.length - 1
-    }
+  get() = this.name.lastIndexOf(".").let { dot ->
+    dot > -1 && dot < this.name.length - 1
+  }
 
 /**
  * 文件扩展名.
  */
 val File.extension: String
-    get() {
-        if (absolutePath.isNullOrEmpty()) {
-            return absolutePath
-        }
-        val lastPoi = absolutePath.lastIndexOf('.')
-        val lastSep = absolutePath.lastIndexOf(File.separator)
-        return if (lastPoi == -1 || lastSep >= lastPoi) "" else absolutePath.substring(lastPoi + 1)
+  get() {
+    if (absolutePath.isNullOrEmpty()) {
+      return absolutePath
     }
+    val lastPoi = absolutePath.lastIndexOf('.')
+    val lastSep = absolutePath.lastIndexOf(File.separator)
+    return if (lastPoi == -1 || lastSep >= lastPoi) "" else absolutePath.substring(lastPoi + 1)
+  }
 
 /**
  * 获取不带扩展名的文件名.
  */
 val File.fileNameNoEx: String?
-    get() {
-        val dot = this.name.lastIndexOf('.')
-        if (dot > -1 && dot < this.name.length) {
-            return this.name.substring(0, dot)
-        }
-        return name
+  get() {
+    val dot = this.name.lastIndexOf('.')
+    if (dot > -1 && dot < this.name.length) {
+      return this.name.substring(0, dot)
     }
+    return name
+  }
 
 val String.hasExtension: Boolean
-    get() {
-        val dot = lastIndexOf('.')
-        return dot > -1 && dot < length - 1
-    }
+  get() {
+    val dot = lastIndexOf('.')
+    return dot > -1 && dot < length - 1
+  }
 
 /**
  * 获取文件名（去掉path）
  */
 val String.filename: String
-    get() {
-        val sep = lastIndexOf('/')
-        if (sep > -1 && sep < length - 1) {
-            return substring(sep + 1)
-        }
-        return this
+  get() {
+    val sep = lastIndexOf('/')
+    if (sep > -1 && sep < length - 1) {
+      return substring(sep + 1)
     }
+    return this
+  }
 
 /**
  * 获取扩展名
  */
 val String.extension: String?
-    get() {
-        val dot = lastIndexOf('.')
-        return if (dot > -1 && dot < length - 1) {
-            substring(dot + 1)
-        } else null
-    }
+  get() {
+    val dot = lastIndexOf('.')
+    return if (dot > -1 && dot < length - 1) {
+      substring(dot + 1)
+    } else null
+  }
 
 /**
  * 获取不带扩展名的文件名
  */
 val String.fileNameNoEx: String?
-    get() {
-        val dot = this.lastIndexOf('.')
-        if (dot > -1 && dot < this.length) {
-            return this.substring(0, dot)
-        }
-        return this
+  get() {
+    val dot = this.lastIndexOf('.')
+    if (dot > -1 && dot < this.length) {
+      return this.substring(0, dot)
     }
+    return this
+  }
 
 /**
  * 文件大小单位.
  */
 enum class SizeUnit {
-    Byte,
-    KB,
-    MB,
-    GB,
-    TB,
-    Auto
+  Byte,
+  KB,
+  MB,
+  GB,
+  TB,
+  Auto
 }
 
 /**
@@ -116,12 +116,12 @@ enum class SizeUnit {
  * @return Long
  */
 fun File.getFileSize(): Long =
-    when {
-        !exists() -> 0L
-        isFile -> inputStream().use { it.available().toLong() }
-        isDirectory -> (listFiles() ?: arrayOf()).sumBy { it.getFileSize().toInt() }.toLong()
-        else -> 0
-    }
+  when {
+    !exists() -> 0L
+    isFile -> inputStream().use { it.available().toLong() }
+    isDirectory -> (listFiles() ?: arrayOf()).sumBy { it.getFileSize().toInt() }.toLong()
+    else -> 0
+  }
 
 /**
  * long(B)转换成格式化的文件大小
@@ -130,34 +130,34 @@ fun File.getFileSize(): Long =
  * @return String?
  */
 fun Long.formatFileSize(unit: SizeUnit = SizeUnit.Auto): String? {
-    var vUnit = unit
-    if (this < 0) {
-        return null
-    }
+  var vUnit = unit
+  if (this < 0) {
+    return null
+  }
 
-    val kb = 1024.0f
-    val mb = kb * 1024
-    val gb = mb * 1024
-    val tb = gb * 1024
+  val kb = 1024.0f
+  val mb = kb * 1024
+  val gb = mb * 1024
+  val tb = gb * 1024
 
-    if (vUnit == SizeUnit.Auto) {
-        vUnit = when {
-            this < kb -> SizeUnit.Byte
-            this < mb -> SizeUnit.KB
-            this < gb -> SizeUnit.MB
-            this < tb -> SizeUnit.GB
-            else -> SizeUnit.TB
-        }
+  if (vUnit == SizeUnit.Auto) {
+    vUnit = when {
+      this < kb -> SizeUnit.Byte
+      this < mb -> SizeUnit.KB
+      this < gb -> SizeUnit.MB
+      this < tb -> SizeUnit.GB
+      else -> SizeUnit.TB
     }
+  }
 
-    return when (vUnit) {
-        SizeUnit.Byte -> this.toString() + "B"
-        SizeUnit.KB -> String.format(Locale.US, "%dK", (this / kb).roundToInt())
-        SizeUnit.MB -> String.format(Locale.US, "%dM", (this / mb).roundToInt())
-        SizeUnit.GB -> String.format(Locale.US, "%dG", this / gb)
-        SizeUnit.TB -> String.format(Locale.US, "%dP", this / tb)
-        else -> this.toString() + "B"
-    }
+  return when (vUnit) {
+    SizeUnit.Byte -> this.toString() + "B"
+    SizeUnit.KB -> String.format(Locale.US, "%dK", (this / kb).roundToInt())
+    SizeUnit.MB -> String.format(Locale.US, "%dM", (this / mb).roundToInt())
+    SizeUnit.GB -> String.format(Locale.US, "%dG", this / gb)
+    SizeUnit.TB -> String.format(Locale.US, "%dP", this / tb)
+    else -> this.toString() + "B"
+  }
 }
 
 /**
@@ -166,19 +166,19 @@ fun Long.formatFileSize(unit: SizeUnit = SizeUnit.Auto): String? {
  * @return String
  */
 fun File.toImageBase64(): String {
-    val bytes = toByteArray()
-    val encoded = Base64.encodeToString(bytes, Base64.DEFAULT)
-    return "data:${getFileType()};base64,$encoded"
+  val bytes = toByteArray()
+  val encoded = Base64.encodeToString(bytes, Base64.DEFAULT)
+  return "data:${getFileType()};base64,$encoded"
 }
 
 /**
  * 获取文件的图片格式
  */
 fun File.getFileType(): String {
-    val options = BitmapFactory.Options()
-    options.inJustDecodeBounds = true
-    BitmapFactory.decodeFile(path, options)
-    return options.outMimeType ?: "image/jpeg"
+  val options = BitmapFactory.Options()
+  options.inJustDecodeBounds = true
+  BitmapFactory.decodeFile(path, options)
+  return options.outMimeType ?: "image/jpeg"
 }
 
 /**
@@ -203,13 +203,13 @@ fun InputStream.copyToFile(path: String): File = copyToFile(File(path))
  * @return File
  */
 fun InputStream.copyToFile(file: File): File {
-    file.parentFile?.mkdirs()
-    use { input ->
-        (file.outputStream().use { output ->
-            input.copyTo(output, DEFAULT_BUFFER_SIZE)
-        })
-    }
-    return file
+  file.parentFile?.mkdirs()
+  use { input ->
+    (file.outputStream().use { output ->
+      input.copyTo(output, DEFAULT_BUFFER_SIZE)
+    })
+  }
+  return file
 }
 
 /**
@@ -225,9 +225,9 @@ fun File.rewrite(file: File) = outputStream().rewrite(file)
  * @param file File
  */
 fun OutputStream.rewrite(file: File) {
-    use { output ->
-        file.inputStream().use { it.copyTo(output, DEFAULT_BUFFER_SIZE) }
-    }
+  use { output ->
+    file.inputStream().use { it.copyTo(output, DEFAULT_BUFFER_SIZE) }
+  }
 }
 
 /**
@@ -236,15 +236,15 @@ fun OutputStream.rewrite(file: File) {
  * @param path String 解压到的路径.
  */
 fun InputStream.unzip(path: String) {
-    val desDir = File(path)
-    if (!desDir.exists()) {
-        desDir.mkdirs()
-    }
-    // 先保存成文件再解压
-    val temp = File("${desDir.parentFile}/temp.dat")
-    this.copyToFile(temp).unzip(path)
-    // 操作完成后删文件
-    temp.delete()
+  val desDir = File(path)
+  if (!desDir.exists()) {
+    desDir.mkdirs()
+  }
+  // 先保存成文件再解压
+  val temp = File("${desDir.parentFile}/temp.dat")
+  this.copyToFile(temp).unzip(path)
+  // 操作完成后删文件
+  temp.delete()
 }
 
 /**
@@ -253,33 +253,33 @@ fun InputStream.unzip(path: String) {
  * @param path String 解压到的路径.
  */
 fun File.unzip(path: String) {
-    val desDir = File(path)
-    if (!desDir.exists()) {
-        desDir.mkdirs()
+  val desDir = File(path)
+  if (!desDir.exists()) {
+    desDir.mkdirs()
+  }
+  val zipFile = ZipFile(this)
+  val entries = zipFile.entries()
+  while (entries.hasMoreElements()) {
+    val entry = entries.nextElement() as ZipEntry
+    val desFile = File(path + File.separator + entry.name)
+    if (entry.isDirectory) {
+      desFile.mkdirs()
+      continue
     }
-    val zipFile = ZipFile(this)
-    val entries = zipFile.entries()
-    while (entries.hasMoreElements()) {
-        val entry = entries.nextElement() as ZipEntry
-        val desFile = File(path + File.separator + entry.name)
-        if (entry.isDirectory) {
-            desFile.mkdirs()
-            continue
-        }
-        if (!desFile.exists()) {
-            val fileParentDir = desFile.parentFile
-            if (fileParentDir?.exists() != true) {
-                fileParentDir?.mkdirs()
-            }
-            desFile.createNewFile()
-        }
-        val ins = zipFile.getInputStream(entry)
-        val outs = desFile.outputStream()
-        ins.copyTo(outs, 1024 * 1024)
-        ins.close()
-        outs.close()
+    if (!desFile.exists()) {
+      val fileParentDir = desFile.parentFile
+      if (fileParentDir?.exists() != true) {
+        fileParentDir?.mkdirs()
+      }
+      desFile.createNewFile()
     }
-    zipFile.close()
+    val ins = zipFile.getInputStream(entry)
+    val outs = desFile.outputStream()
+    ins.copyTo(outs, 1024 * 1024)
+    ins.close()
+    outs.close()
+  }
+  zipFile.close()
 }
 
 /**
@@ -289,27 +289,27 @@ fun File.unzip(path: String) {
  */
 fun File.getJsonFromFile(): String? {
 
-    var fis: FileInputStream? = null
-    var fileLock: FileLock? = null
-    var channel: FileChannel? = null
-    if (this.exists()) {
+  var fis: FileInputStream? = null
+  var fileLock: FileLock? = null
+  var channel: FileChannel? = null
+  if (this.exists()) {
 
-        try {
-            fis = FileInputStream(this)
-            channel = fis.channel
-            fileLock = channel.tryLock(0, Long.MAX_VALUE, true)
-            return fis.bufferedReader().use { it.readText() }
-        } catch (e: Exception) {
-            com.orhanobut.logger.Logger.e("extensions.Files", e.toString())
-        } finally {
-            if (fileLock?.isValid == true) {
-                fileLock.release()
-            }
-            if (channel?.isOpen == true) {
-                channel.close()
-            }
-            fis?.close()
-        }
+    try {
+      fis = FileInputStream(this)
+      channel = fis.channel
+      fileLock = channel.tryLock(0, Long.MAX_VALUE, true)
+      return fis.bufferedReader().use { it.readText() }
+    } catch (e: Exception) {
+      com.orhanobut.logger.Logger.e("extensions.Files", e.toString())
+    } finally {
+      if (fileLock?.isValid == true) {
+        fileLock.release()
+      }
+      if (channel?.isOpen == true) {
+        channel.close()
+      }
+      fis?.close()
     }
-    return null
+  }
+  return null
 }

@@ -16,7 +16,7 @@ import java.io.FileNotFoundException
  * 功能：
  * 描述：文件下载器
  */
-interface KDownloader {
+interface Downloader {
 
   /**
    * 下载.
@@ -58,11 +58,11 @@ interface KDownloader {
   fun download(downloadUrl: String, saveFileDir: String, saveFileName: String, onProgress: ((totalSize: Long, progress: Float) -> Unit)? = null): Deferred<File>
 
   companion object {
-    operator fun invoke(client: OkHttpClient): KDownloader = KDownloaderImpl(client)
+    operator fun invoke(client: OkHttpClient): Downloader = DownloaderImpl(client)
   }
 }
 
-internal class KDownloaderImpl constructor(private val client: OkHttpClient) : KDownloader {
+internal class DownloaderImpl constructor(private val client: OkHttpClient) : Downloader {
 
   override fun download(downloadUrl: String, saveFileDir: String, saveFileName: String, onProgress: ((totalSize: Long, progress: Float) -> Unit)?): Deferred<File> {
     val deferred = CompletableDeferred<File>()

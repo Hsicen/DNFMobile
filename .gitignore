@@ -12,3 +12,5 @@
 /buildSrc/build/
 /extensions/src/androidTest
 /extensions/src/test
+/keystore.properties
+/hsicen.jks

@@ -1,7 +1,7 @@
 package com.hsicen.core.data.cache
 
 import com.hsicen.core.data.database.dao.CacheDao
-import com.hsicen.core.data.database.entity.Cache
+import com.hsicen.core.data.model.Cache
 import com.orhanobut.logger.Logger
 
 /**

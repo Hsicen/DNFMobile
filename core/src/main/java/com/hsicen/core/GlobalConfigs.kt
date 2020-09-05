@@ -8,6 +8,12 @@ package com.hsicen.core
  */
 object GlobalConfigs {
 
-    /** 默认分页数据条数. */
-    const val DEFAULT_PAGE_SIZE = 20
+  /** 默认分页数据条数. */
+  const val DEFAULT_PAGE_SIZE = 20
+
+  /** AES加密的KEY. */
+  const val AES_KEY = "asaqw2348jh5ghgt"
+
+  /** 网络请求超时时间. */
+  const val HTTP_TIME_OUT = 30L
 }

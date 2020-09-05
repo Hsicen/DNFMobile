@@ -1,17 +1,65 @@
 //其它公共配置在module_config.gradle 文件中
 android {
-    defaultConfig {
-        applicationId "com.hsicen.dnfmobile"
+  defaultConfig {
+    applicationId "com.hsicen.dnfmobile"
+
+    multiDexEnabled true
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  //签名配置
+  signingConfigs {
+    config_release {
+      //加载 keystore配置文件
+      def keystoreProps = new Properties()
+      keystoreProps.load(project.rootProject.file('keystore.properties').newDataInputStream())
+
+      keyAlias keystoreProps.getProperty("keystore.alias")
+      keyPassword keystoreProps.getProperty("keystore.password")
+      storeFile file(keystoreProps.getProperty("keystore.path"))
+      storePassword keystoreProps.getProperty("keystore.alias_password")
+    }
+  }
+
+  buildTypes {
+    debug {
+      minifyEnabled false
+      zipAlignEnabled false
+      shrinkResources false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.config_release
     }
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    release {
+      minifyEnabled true
+      zipAlignEnabled true
+      shrinkResources true
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.config_release
     }
+  }
+
+  flavorDimensions "environment"
+  productFlavors {
+    dev {
+      applicationIdSuffix ".dev"
+      def appKeyFlavor = 'dev'
+      manifestPlaceholders = [APPLICATION_ID: app_key[appKeyFlavor].applicationId]
+    }
+
+    ts {
+      applicationIdSuffix ".test"
+      def appKeyFlavor = 'test'
+      manifestPlaceholders = [APPLICATION_ID: app_key[appKeyFlavor].applicationId]
+    }
+
+    prd {
+      def appKeyFlavor = 'release'
+      manifestPlaceholders = [APPLICATION_ID: app_key[appKeyFlavor].applicationId]
+    }
+  }
 }
 
 dependencies {
-    implementation project(path: ':core')
+  implementation project(':core')
 }

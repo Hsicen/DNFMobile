@@ -43,6 +43,11 @@ object Versions {
   const val multiDex = "2.0.1"
   const val retrofit = "2.9.0"
   const val okHttp = "4.8.1"
+  const val luBan = "1.1.8"
+  const val kotPref = "2.11.0"
+  const val aRouter = "1.5.0"
+  const val aRouterCompile = "1.2.2"
+  const val aRouterRegister = "1.0.2"
 
 
   /*** =========测试模块 Version=========***/
@@ -84,7 +89,7 @@ object Deps {
 
   //LeakCanary
   const val leakCanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
-  const val leakCanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:${Versions.leakCanary}"
+  const val leakCanaryRelease = "com.squareup.leakcanary:leakcanary-object-watcher-android::${Versions.leakCanary}"
 
   //Room
   const val room = "androidx.room:room-runtime:${Versions.room}"
@@ -110,6 +115,17 @@ object Deps {
   const val okHttpUrlConnection = "com.squareup.okhttp3:okhttp-urlconnection:${Versions.okHttp}"
   const val okHttpLogInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
 
+  //luBan
+  const val luBan = "top.zibin:Luban:${Versions.luBan}"
+
+  //KotPref
+  const val kotPref = "com.chibatching.kotpref:kotpref:${Versions.kotPref}"
+  const val kotPrefEnum = "com.chibatching.kotpref:enum-support:${Versions.kotPref}"
+  const val kotPrefGson = "com.chibatching.kotpref:gson-support:${Versions.kotPref}"
+
+  //ARouter
+  const val aRouter = "com.alibaba:arouter-api:${Versions.aRouter}"
+  const val aRouterCompile = "com.alibaba:arouter-compiler:${Versions.aRouterCompile}"
 
   /*** =========测试模块依赖=========***/
   const val junitJava = "junit:junit:${Versions.junitJava}"

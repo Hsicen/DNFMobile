@@ -1,46 +1,49 @@
 <resources>
-    <string name="digits_number_and_letter">0123456789zxcvbnmasdfghjklqwertyuiopZXCVBNMASDFGHJKLQWERTYUIOP</string>
+  <string name="digits_number_and_letter">0123456789zxcvbnmasdfghjklqwertyuiopZXCVBNMASDFGHJKLQWERTYUIOP</string>
 
-    <string name="error_not_network">网络开小差了，稍后再试试吧~</string>
-    <string name="error_not_network1">网络开小差了</string>
-    <string name="error_server_error">服务器忙，请稍后重试</string>
-    <string name="error_load_fail_and_wait_retry">加载失败，点击重试</string>
+  <string name="error_not_network">网络开小差了，稍后再试试吧~</string>
+  <string name="error_not_network1">网络开小差了</string>
+  <string name="error_server_error">服务器忙，请稍后重试</string>
+  <string name="error_load_fail_and_wait_retry">加载失败，点击重试</string>
 
-    <string name="load_all_data">已经全部加载完毕</string>
-    <string name="load_loading">加载中</string>
-    <string name="empty_content">还没有内容</string>
+  <string name="load_all_data">已经全部加载完毕</string>
+  <string name="load_loading">加载中</string>
+  <string name="empty_content">还没有内容</string>
 
-    <string name="msg_no_more_data">--没有更多了--</string>
-    <string name="msg_load_error">请求失败，请重试</string>
+  <string name="msg_no_more_data">--没有更多了--</string>
+  <string name="msg_load_error">请求失败，请重试</string>
 
-    <string name="action_cancel">取消</string>
-    <string name="action_confirm">确定</string>
-    <string name="action_call">呼叫</string>
-    <string name="action_submit">提交</string>
-    <string name="action_next_step">下一步</string>
-    <string name="action_bind">绑定</string>
-    <string name="action_unbind">解绑</string>
-    <string name="action_save">保存</string>
-    <string name="action_save_image">保存图片</string>
-    <string name="action_not_save">不保存</string>
-    <string name="action_exit">退出</string>
-    <string name="action_contact_customer_service">联系客服</string>
-    <string name="action_i_known">知道了</string>
-    <string name="action_del">删除</string>
-    <string name="action_search">搜索</string>
-    <string name="action_back">返回</string>
-    <string name="action_complete">完成</string>
-    <string name="action_clear">清空</string>
-    <string name="action_setting">设置</string>
+  <string name="action_cancel">取消</string>
+  <string name="action_confirm">确定</string>
+  <string name="action_call">呼叫</string>
+  <string name="action_submit">提交</string>
+  <string name="action_next_step">下一步</string>
+  <string name="action_bind">绑定</string>
+  <string name="action_unbind">解绑</string>
+  <string name="action_save">保存</string>
+  <string name="action_save_image">保存图片</string>
+  <string name="action_not_save">不保存</string>
+  <string name="action_exit">退出</string>
+  <string name="action_contact_customer_service">联系客服</string>
+  <string name="action_i_known">知道了</string>
+  <string name="action_del">删除</string>
+  <string name="action_search">搜索</string>
+  <string name="action_back">返回</string>
+  <string name="action_complete">完成</string>
+  <string name="action_clear">清空</string>
+  <string name="action_setting">设置</string>
 
-    <string name="msg_save_success">保存成功</string>
-    <string name="msg_save_failed">保存失败</string>
-    <string name="msg_delete_success">删除成功</string>
-    <string name="msg_please_install_wechat">请先安装并登录微信</string>
-    <string name="msg_storage_permission_revoked">未开启文件读写权限，请在设置中打开对应权限</string>
-    <string name="msg_camera_permission_revoked">未开启相机权限，请在设置中打开对应权限</string>
+  <string name="msg_save_success">保存成功</string>
+  <string name="msg_save_failed">保存失败</string>
+  <string name="msg_delete_success">删除成功</string>
+  <string name="msg_please_install_wechat">请先安装并登录微信</string>
+  <string name="msg_storage_permission_revoked">未开启文件读写权限，请在设置中打开对应权限</string>
+  <string name="msg_camera_permission_revoked">未开启相机权限，请在设置中打开对应权限</string>
 
-    <!--Image description-->
-    <string name="img_desc">hsiceni@gmail.com</string>
+  <!---->
+  <string name="splitMark">></string>
+
+  <!--Image description-->
+  <string name="img_desc">hsiceni@gmail.com</string>
 
 </resources>

@@ -1,18 +1,35 @@
 //其它公共配置在module_config.gradle 文件中
 
 android {
-    defaultConfig {
-        consumerProguardFiles "consumer-rules.pro"
+  //渠道配置
+  flavorDimensions "environment"
+  productFlavors {
+    dev {
+      def flavorName = name
+      def appKeyFlavor = 'dev'
+
+      buildConfigField "String", "HTTP_SERVER_URL", "\"${environment[flavorName].server}\""
+      buildConfigField "String", "BUGLY_KEY", "\"${app_key[appKeyFlavor].bugly}\""
     }
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    ts {
+      def flavorName = name
+      def appKeyFlavor = 'test'
+
+      buildConfigField "String", "HTTP_SERVER_URL", "\"${environment[flavorName].server}\""
+      buildConfigField "String", "BUGLY_KEY", "\"${app_key[appKeyFlavor].bugly}\""
     }
+
+    prd {
+      def flavorName = name
+      def appKeyFlavor = 'release'
+
+      buildConfigField "String", "HTTP_SERVER_URL", "\"${environment[flavorName].server}\""
+      buildConfigField "String", "BUGLY_KEY", "\"${app_key[appKeyFlavor].bugly}\""
+    }
+  }
 }
 
 dependencies {
-    implementation project(path: ':extensions')
+  api project(':extensions')
 }

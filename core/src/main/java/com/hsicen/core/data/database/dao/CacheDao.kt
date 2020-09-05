@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.hsicen.core.data.database.entity.Cache
+import com.hsicen.core.data.model.Cache
 
 /**
  * 作者：hsicen  2020/8/29 22:42

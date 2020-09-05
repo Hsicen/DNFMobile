@@ -5,7 +5,10 @@ ext {
                  prd: [server: "https://hsicen.com"]]
 
   //编译版本配置
-  app_key = [dev    : [applicationId: "com.hsicen.app.dev",],
-             test   : [applicationId: "com.hsicen.app.test",],
-             release: [applicationId: "com.hsicen.app",]]
+  app_key = [dev    : [applicationId: "com.hsicen.app.dev",
+                       bugly        : "dev_bugly_app_key"],
+             test   : [applicationId: "com.hsicen.app.test",
+                       bugly        : "test_bugly_app_key"],
+             release: [applicationId: "com.hsicen.app",
+                       bugly        : "release_bugly_app_key"]]
 }

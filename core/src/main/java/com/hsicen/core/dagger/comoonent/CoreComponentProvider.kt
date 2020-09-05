@@ -4,8 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import com.hsicen.core.data.cache.DbCache
 import com.hsicen.core.data.database.CoreDatabase
-import com.hsicen.core.retrofit.ApiServices
-import com.hsicen.core.utils.KDownloader
+import com.hsicen.core.net.ApiServices
+import com.hsicen.core.utils.*
 import leakcanary.ObjectWatcher
 import java.net.CookieStore
 
@@ -63,25 +63,25 @@ interface CoreComponentProvider {
    * 对外提供文件下载器实例.
    * @return KDownloader
    */
-  fun downloader(): KDownloader
+  fun downloader(): Downloader
 
   /**
    * 对外提供文件上传器实例.
    * @return KUploader
    */
-  fun uploader(): KUploader
+  fun uploader(): Uploader
 
   /**
    * 对外提供图片文件上传器实例.
-   * @return KImageUploader
+   * @return ImageUploader
    */
-  fun imageUploader(): KImageUploader
+  fun imageUploader(): ImageUploader
 
   /**
    * 对外提供文件管理实例.
-   * @return KFileManager
+   * @return FileManager
    */
-  fun fileManager(): KFileManager
+  fun fileManager(): FileManager
 
   /**
    * 对外提供imei访问实例.
@@ -91,7 +91,7 @@ interface CoreComponentProvider {
 
   /**
    * 对外提供Activity管理实例.
-   * @return KActivityManager
+   * @return ActivityManager
    */
-  fun activityManager(): KActivityManager
+  fun activityManager(): ActivityManager
 }
