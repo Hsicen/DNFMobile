@@ -12,9 +12,9 @@ import kotlin.coroutines.EmptyCoroutineContext
  * 描述：协程调度器
  */
 object CoroutinesDispatchers {
-    val ui: CoroutineDispatcher = Dispatchers.Main
-    val computation: CoroutineDispatcher = Dispatchers.Default
-    val io: CoroutineDispatcher = Dispatchers.IO
+  val ui: CoroutineDispatcher = Dispatchers.Main
+  val computation: CoroutineDispatcher = Dispatchers.Default
+  val io: CoroutineDispatcher = Dispatchers.IO
 }
 
 /**
@@ -23,7 +23,7 @@ object CoroutinesDispatchers {
  * @return T
  */
 suspend fun <T> withIO(block: suspend CoroutineScope.() -> T) =
-    withContext(CoroutinesDispatchers.io, block)
+  withContext(CoroutinesDispatchers.io, block)
 
 /**
  * 调度到ui协程中执行.
@@ -31,7 +31,7 @@ suspend fun <T> withIO(block: suspend CoroutineScope.() -> T) =
  * @return T
  */
 suspend fun <T> withUI(block: suspend CoroutineScope.() -> T) =
-    withContext(CoroutinesDispatchers.ui, block)
+  withContext(CoroutinesDispatchers.ui, block)
 
 /**
  * 调度到computation协程中执行.
@@ -39,7 +39,7 @@ suspend fun <T> withUI(block: suspend CoroutineScope.() -> T) =
  * @return T
  */
 suspend fun <T> withComputation(block: suspend CoroutineScope.() -> T) =
-    withContext(CoroutinesDispatchers.computation, block)
+  withContext(CoroutinesDispatchers.computation, block)
 
 /**
  * io协程中执行代码块.
@@ -47,7 +47,7 @@ suspend fun <T> withComputation(block: suspend CoroutineScope.() -> T) =
  * @return Job
  */
 fun <T> io(block: suspend CoroutineScope.() -> T) = GlobalScope.launch(CoroutinesDispatchers.io) {
-    block.invoke(this)
+  block.invoke(this)
 }
 
 /**
@@ -56,7 +56,7 @@ fun <T> io(block: suspend CoroutineScope.() -> T) = GlobalScope.launch(Coroutine
  * @return Job
  */
 fun <T> ui(block: suspend CoroutineScope.() -> T) = GlobalScope.launch(CoroutinesDispatchers.ui) {
-    block.invoke(this)
+  block.invoke(this)
 }
 
 /**
@@ -65,9 +65,9 @@ fun <T> ui(block: suspend CoroutineScope.() -> T) = GlobalScope.launch(Coroutine
  * @return Job
  */
 fun <T> computation(block: suspend CoroutineScope.() -> T) =
-    GlobalScope.launch(CoroutinesDispatchers.computation) {
-        block.invoke(this)
-    }
+  GlobalScope.launch(CoroutinesDispatchers.computation) {
+    block.invoke(this)
+  }
 
 /**
  * io协程中执行代码快.
@@ -76,15 +76,15 @@ fun <T> computation(block: suspend CoroutineScope.() -> T) =
  * @return JobWrapper
  */
 fun <T> safetyIO(block: suspend CoroutineScope.() -> T): JobWrapper {
-    val jobWrapper = JobWrapper()
-    jobWrapper.job = GlobalScope.launch(CoroutinesDispatchers.io) {
-        try {
-            block.invoke(this)
-        } catch (e: Exception) {
-            jobWrapper.onFailure?.invoke(e) ?: Logger.e(e, "safetyIO")
-        }
+  val jobWrapper = JobWrapper()
+  jobWrapper.job = GlobalScope.launch(CoroutinesDispatchers.io) {
+    try {
+      block.invoke(this)
+    } catch (e: Exception) {
+      jobWrapper.onFailure?.invoke(e) ?: Logger.e(e, "safetyIO")
     }
-    return jobWrapper
+  }
+  return jobWrapper
 }
 
 /**
@@ -94,15 +94,15 @@ fun <T> safetyIO(block: suspend CoroutineScope.() -> T): JobWrapper {
  * @return JobWrapper
  */
 fun <T> safetyUI(block: suspend CoroutineScope.() -> T): JobWrapper {
-    val jobWrapper = JobWrapper()
-    jobWrapper.job = GlobalScope.launch(CoroutinesDispatchers.ui) {
-        try {
-            block.invoke(this)
-        } catch (e: Exception) {
-            jobWrapper.onFailure?.invoke(e) ?: Logger.e(e, "safetyUI")
-        }
+  val jobWrapper = JobWrapper()
+  jobWrapper.job = GlobalScope.launch(CoroutinesDispatchers.ui) {
+    try {
+      block.invoke(this)
+    } catch (e: Exception) {
+      jobWrapper.onFailure?.invoke(e) ?: Logger.e(e, "safetyUI")
     }
-    return jobWrapper
+  }
+  return jobWrapper
 }
 
 /**
@@ -112,15 +112,15 @@ fun <T> safetyUI(block: suspend CoroutineScope.() -> T): JobWrapper {
  * @return JobWrapper
  */
 fun <T> safetyComputation(block: suspend CoroutineScope.() -> T): JobWrapper {
-    val jobWrapper = JobWrapper()
-    jobWrapper.job = GlobalScope.launch(CoroutinesDispatchers.computation) {
-        try {
-            block.invoke(this)
-        } catch (e: Exception) {
-            jobWrapper.onFailure?.invoke(e) ?: Logger.e(e, "safetyIO")
-        }
+  val jobWrapper = JobWrapper()
+  jobWrapper.job = GlobalScope.launch(CoroutinesDispatchers.computation) {
+    try {
+      block.invoke(this)
+    } catch (e: Exception) {
+      jobWrapper.onFailure?.invoke(e) ?: Logger.e(e, "safetyIO")
     }
-    return jobWrapper
+  }
+  return jobWrapper
 }
 
 /**
@@ -136,30 +136,30 @@ fun CoroutineScope.safetyLaunch(
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
 ): JobWrapper {
-    val jobWrapper = JobWrapper()
-    jobWrapper.job = launch(context, start) {
-        runCatching {
-            block.invoke(this)
-        }.onFailure {
-            jobWrapper.onFailure?.invoke(it) ?: Logger.e(it, "safetyLaunch")
-        }
+  val jobWrapper = JobWrapper()
+  jobWrapper.job = launch(context, start) {
+    runCatching {
+      block.invoke(this)
+    }.onFailure {
+      jobWrapper.onFailure?.invoke(it) ?: Logger.e(it, "safetyLaunch")
     }
-    return jobWrapper
+  }
+  return jobWrapper
 }
 
 class JobWrapper {
 
-    lateinit var job: Job
+  lateinit var job: Job
 
-    internal var onFailure: ((Throwable) -> Unit)? = null
+  internal var onFailure: ((Throwable) -> Unit)? = null
 
-    /**
-     * 失败回调.
-     * @param onFailure (Throwable) -> Unit
-     * @return JobWrapper
-     */
-    fun onFailure(onFailure: (Throwable) -> Unit): JobWrapper {
-        this.onFailure = onFailure
-        return this
-    }
+  /**
+   * 失败回调.
+   * @param onFailure (Throwable) -> Unit
+   * @return JobWrapper
+   */
+  fun onFailure(onFailure: (Throwable) -> Unit): JobWrapper {
+    this.onFailure = onFailure
+    return this
+  }
 }
