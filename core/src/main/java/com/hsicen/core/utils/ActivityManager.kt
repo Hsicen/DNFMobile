@@ -111,6 +111,7 @@ class ActivityManager(private val ctx: Context) {
     resumedActivityStack.clear()
     currentActivity = null
     waitTaskQueue.clear()
+    android.os.Process.killProcess(android.os.Process.myPid())
   }
 
   /**

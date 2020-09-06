@@ -1,67 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Padding样式尺寸 -->
-    <dimen name="padding_z1">8dp</dimen>
-    <dimen name="padding_z2">16dp</dimen>
-    <dimen name="padding_z3">24dp</dimen>
-    <dimen name="padding_z4">30dp</dimen>
-    <dimen name="padding_z5">32dp</dimen>
-    <dimen name="padding_z6">60dp</dimen>
+  <!-- Padding样式尺寸 -->
+  <dimen name="padding_z1">8dp</dimen>
+  <dimen name="padding_z2">16dp</dimen>
+  <dimen name="padding_z3">24dp</dimen>
+  <dimen name="padding_z4">30dp</dimen>
+  <dimen name="padding_z5">32dp</dimen>
+  <dimen name="padding_z6">60dp</dimen>
 
+  <!-- Margin样式尺寸 -->
+  <dimen name="margin_z1">8dp</dimen>
+  <dimen name="margin_z2">16dp</dimen>
+  <dimen name="margin_z3">24dp</dimen>
+  <dimen name="margin_z4">32dp</dimen>
 
-    <!-- Margin样式尺寸 -->
-    <dimen name="margin_z1">8dp</dimen>
-    <dimen name="margin_z2">16dp</dimen>
-    <dimen name="margin_z3">24dp</dimen>
-    <dimen name="margin_z4">32dp</dimen>
+  <!-- 字体尺寸-->
+  <dimen name="font_z9">36sp</dimen>
+  <dimen name="font_z8">28sp</dimen>
+  <dimen name="font_z7">20sp</dimen>
+  <dimen name="font_z6">18sp</dimen>
+  <dimen name="font_z5">16sp</dimen>
+  <dimen name="font_z4">14sp</dimen>
+  <dimen name="font_z3">13sp</dimen>
+  <dimen name="font_z2">12sp</dimen>
+  <dimen name="font_z1">11sp</dimen>
 
-    <!-- 字体尺寸-->
-    <dimen name="font_z9">36sp</dimen>
-    <dimen name="font_z8">28sp</dimen>
-    <dimen name="font_z7">20sp</dimen>
-    <dimen name="font_z6">18sp</dimen>
-    <dimen name="font_z5">16sp</dimen>
-    <dimen name="font_z4">14sp</dimen>
-    <dimen name="font_z3">13sp</dimen>
-    <dimen name="font_z2">12sp</dimen>
-    <dimen name="font_z1">11sp</dimen>
+  <!-- ============================== 按钮样式 ============================== -->
+  <dimen name="btn_size_1_height">52dp</dimen>
+  <dimen name="btn_size_2_height">48dp</dimen>
+  <dimen name="btn_size_3_height">40dp</dimen>
+  <dimen name="btn_size_4_height">32dp</dimen>
 
-    <!-- ============================== 按钮样式 ============================== -->
-    <dimen name="btn_size_1_height">52dp</dimen>
-    <dimen name="btn_size_2_height">48dp</dimen>
-    <dimen name="btn_size_3_height">40dp</dimen>
-    <dimen name="btn_size_4_height">32dp</dimen>
+  <dimen name="btn_size_1_padding_h">113dp</dimen>
+  <dimen name="btn_size_2_padding_h">67dp</dimen>
+  <dimen name="btn_size_3_padding_h">47dp</dimen>
+  <dimen name="btn_size_4_padding_h">16dp</dimen>
 
-    <dimen name="btn_size_1_padding_h">113dp</dimen>
-    <dimen name="btn_size_2_padding_h">67dp</dimen>
-    <dimen name="btn_size_3_padding_h">47dp</dimen>
-    <dimen name="btn_size_4_padding_h">16dp</dimen>
+  <!-- 边框宽度. -->
+  <dimen name="border_wight_1">1dp</dimen>
+  <dimen name="border_wight_2">1px</dimen>
 
-    <!-- 边框宽度. -->
-    <dimen name="border_wight_1">1dp</dimen>
-    <dimen name="border_wight_2">1px</dimen>
+  <dimen name="status_bar_size">24dp</dimen>
+  <integer name="action_bar_size">44</integer>
+  <integer name="status_bar_size">24</integer>
 
-    <dimen name="status_bar_size">24dp</dimen>
-    <integer name="action_bar_size">44</integer>
-    <integer name="status_bar_size">24</integer>
+  <!--  进度条尺寸-->
+  <dimen name="progress_width">40dp</dimen>
+  <dimen name="progress_height">40dp</dimen>
 
-    <!--  进度条尺寸-->
-    <dimen name="progress_width">40dp</dimen>
-    <dimen name="progress_height">40dp</dimen>
+  <!-- Dialog相关dimen属性. -->
+  <dimen name="dialog_normal_width">280dp</dimen>
+  <dimen name="dialog_bg_normal_radius">2dp</dimen>
+  <dimen name="radius_toast">4dp</dimen>
+  <dimen name="tab_bar_height">48dp</dimen>
+  <dimen name="overlap_tab_bar_height">63dp</dimen>
 
-    <!-- Dialog相关dimen属性. -->
-    <dimen name="dialog_normal_width">280dp</dimen>
-    <dimen name="dialog_bg_normal_radius">2dp</dimen>
-    <dimen name="radius_k_toast">4dp</dimen>
-    <dimen name="tab_bar_height">48dp</dimen>
-    <dimen name="overlap_tab_bar_height">63dp</dimen>
+  <dimen name="def_image_drawable_radius_2_dp">2dp</dimen>
+  <dimen name="def_image_drawable_radius_4_dp">4dp</dimen>
+  <dimen name="def_image_drawable_radius_6_dp">6dp</dimen>
 
-    <dimen name="def_image_drawable_radius_2_dp">2dp</dimen>
-    <dimen name="def_image_drawable_radius_4_dp">4dp</dimen>
-    <dimen name="def_image_drawable_radius_6_dp">6dp</dimen>
-
-    <dimen name="def_margin_left">16dp</dimen>
-    <dimen name="def_margin_top">8dp</dimen>
-
+  <dimen name="def_margin_left">16dp</dimen>
+  <dimen name="def_margin_top">8dp</dimen>
 
 </resources>
