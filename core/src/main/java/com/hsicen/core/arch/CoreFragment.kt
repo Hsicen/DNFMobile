@@ -24,8 +24,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.hsicen.core.R
 import com.hsicen.core.coreComponent
 import com.hsicen.core.exceptions.handleForNetwork
-import com.hsicen.core.ui.loading.LoadingDialog
-import com.hsicen.core.ui.loading.showLoading
+import com.hsicen.core.ui.dialog.KLoadingDialog
+import com.hsicen.core.ui.dialog.showLoading
 import com.hsicen.extensions.extensions.hideKeyboard
 import com.hsicen.extensions.extensions.no
 import com.hsicen.extensions.extensions.yes
@@ -51,7 +51,7 @@ abstract class CoreFragment : Fragment() {
   /** 根布局. */
   protected var root: View? = null
 
-  var kLoading: LoadingDialog? = null
+  var kKLoading: KLoadingDialog? = null
     set(value) {
       // 先判断并取消掉上一个loading
       if (field?.isShowing == true) {
@@ -267,19 +267,19 @@ abstract class CoreFragment : Fragment() {
         is LoadState.Loading -> {
           if (hookLoading?.invoke() != true) {
             hideKeyboard()
-            if (kLoading?.isShowing != true) {
-              kLoading = showLoading()
+            if (kKLoading?.isShowing != true) {
+              kKLoading = showLoading()
             }
           }
         }
         is LoadState.Loaded -> {
           if (hookLoaded?.invoke(it) != true) {
-            kLoading?.dismiss()
+            kKLoading?.dismiss()
           }
         }
         is LoadState.LoadError -> {
           if (hookLoadError?.invoke(it) != true) {
-            kLoading?.dismiss()
+            kKLoading?.dismiss()
             it.exception?.handleForNetwork()
           }
         }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <View
+    android:id="@+id/view_bg"
+    android:layout_width="0dp"
+    android:layout_height="36dp"
+    android:background="@drawable/shape_search_bar"
+    android:transitionName="@string/transition_search_bar_bg"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/btn_search"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:layout_width="300dp" />
+
+  <ImageView
+    android:id="@+id/iv_search_flag"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_z2"
+    android:src="@drawable/ic_grey_search"
+    android:transitionName="@string/transition_search_bar_flag"
+    app:layout_constraintBottom_toBottomOf="@+id/view_bg"
+    app:layout_constraintStart_toStartOf="@+id/view_bg"
+    app:layout_constraintTop_toTopOf="@+id/view_bg" />
+
+  <EditText
+    android:id="@+id/et_search_content"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_z1"
+    android:layout_marginEnd="@dimen/margin_z1"
+    android:background="@null"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center_vertical"
+    android:singleLine="true"
+    android:textColor="@color/font_g2"
+    android:textColorHint="#CCD0D5"
+    android:textSize="13sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/ib_clear"
+    app:layout_constraintStart_toEndOf="@+id/iv_search_flag"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_search_hint"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/label_search"
+    android:textColor="@color/font_g2"
+    android:textSize="@dimen/font_z5"
+    android:transitionName="@string/transition_search_bar_hint"
+    android:visibility="invisible"
+    app:layout_constraintBottom_toBottomOf="@+id/view_bg"
+    app:layout_constraintStart_toStartOf="@+id/et_search_content"
+    app:layout_constraintTop_toTopOf="@+id/view_bg"
+    tools:visibility="visible" />
+
+  <ImageButton
+    android:id="@+id/ib_clear"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/margin_z1"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:src="@drawable/ic_input_clear"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="@+id/view_bg"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:visibility="visible" />
+
+  <Button
+    android:id="@+id/btn_search"
+    style="?attr/borderlessButtonStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="?android:attr/selectableItemBackgroundBorderless"
+    android:enabled="false"
+    android:minWidth="0dp"
+    android:paddingStart="@dimen/padding_z2"
+    android:paddingEnd="@dimen/padding_z2"
+    android:text="@string/action_search"
+    android:textColor="@color/btn_light_text"
+    android:textSize="15sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+</merge>

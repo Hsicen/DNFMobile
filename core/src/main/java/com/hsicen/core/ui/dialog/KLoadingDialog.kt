@@ -1,4 +1,4 @@
-package com.hsicen.core.ui.loading
+package com.hsicen.core.ui.dialog
 
 import android.content.Context
 import android.os.Bundle
@@ -17,9 +17,9 @@ import kotlinx.android.synthetic.main.dialog_loading.view.*
  * 功能：
  * 描述：默认的Loading加载弹窗
  */
-class LoadingDialog private constructor(
-    context: Context,
-    private val builder: Builder
+class KLoadingDialog private constructor(
+  context: Context,
+  private val builder: Builder
 ) : AlertDialog(context, R.style.Loading) {
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,8 +59,8 @@ class LoadingDialog private constructor(
      * @param builder (Builder.() -> Unit)?
      * @return KLoadingDialog
      */
-    fun show(context: Context, builder: (Builder.() -> Unit)? = null): LoadingDialog =
-      LoadingDialog(context, Builder().apply { builder?.invoke(this) }).apply {
+    fun show(context: Context, builder: (Builder.() -> Unit)? = null): KLoadingDialog =
+      KLoadingDialog(context, Builder().apply { builder?.invoke(this) }).apply {
         show()
       }
 
@@ -70,13 +70,13 @@ class LoadingDialog private constructor(
      * @param builder (Builder.() -> Unit)?
      * @return KLoadingDialog?
      */
-    fun show(fragment: Fragment, builder: (Builder.() -> Unit)? = null): LoadingDialog? =
+    fun show(fragment: Fragment, builder: (Builder.() -> Unit)? = null): KLoadingDialog? =
       fragment.activity?.let { show(it, builder) }
   }
 }
 
-fun Context.showLoading(builder: (LoadingDialog.Builder.() -> Unit)? = null): LoadingDialog =
-  LoadingDialog.show(this, builder)
+fun Context.showLoading(builder: (KLoadingDialog.Builder.() -> Unit)? = null): KLoadingDialog =
+  KLoadingDialog.show(this, builder)
 
-fun Fragment.showLoading(builder: (LoadingDialog.Builder.() -> Unit)? = null): LoadingDialog? =
-  LoadingDialog.show(this, builder)
+fun Fragment.showLoading(builder: (KLoadingDialog.Builder.() -> Unit)? = null): KLoadingDialog? =
+  KLoadingDialog.show(this, builder)

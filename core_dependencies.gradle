@@ -84,4 +84,7 @@ dependencies {
   implementation Deps.lifeCycleViewModel
   implementation Deps.lifeCycleViewModelKtx
   implementation Deps.lifeCycleViewModelSavedState
+
+  //EventBus
+  implementation Deps.eventBus
 }

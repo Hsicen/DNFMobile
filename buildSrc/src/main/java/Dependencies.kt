@@ -50,6 +50,7 @@ object Versions {
   const val aRouterRegister = "1.0.2"
   const val smartRefresh = "2.0.1"
   const val lifeCycle = "2.2.0"
+  const val eventBus = "1.7.2"
 
 
   /*** =========测试模块 Version=========***/
@@ -140,6 +141,9 @@ object Deps {
   const val lifeCycleViewModel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.lifeCycle}"
   const val lifeCycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifeCycle}"
   const val lifeCycleViewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifeCycle}"
+
+  //EventBus
+  const val eventBus = "com.jeremyliao:live-event-bus-x:${Versions.eventBus}"
 
   /*** =========测试模块依赖=========***/
   const val junitJava = "junit:junit:${Versions.junitJava}"

@@ -17,8 +17,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.Navigator
 import com.hsicen.core.coreComponent
 import com.hsicen.core.exceptions.handleForNetwork
-import com.hsicen.core.ui.loading.LoadingDialog
-import com.hsicen.core.ui.loading.showLoading
+import com.hsicen.core.ui.dialog.KLoadingDialog
+import com.hsicen.core.ui.dialog.showLoading
 import com.hsicen.extensions.extensions.hideKeyboard
 import com.hsicen.extensions.extensions.hideKeyboardWithDelay
 import com.hsicen.extensions.extensions.yes
@@ -35,7 +35,7 @@ abstract class CoreActivity(
   @LayoutRes private val layoutResID: Int
 ) : AppCompatActivity() {
 
-  var kLoading: LoadingDialog? = null
+  var kKLoading: KLoadingDialog? = null
     set(value) {
 
       // 先判断并取消掉上一个loading
@@ -162,21 +162,21 @@ abstract class CoreActivity(
       when (it) {
         is LoadState.Loading -> {
           if (hookLoading?.invoke() != true) {
-            if (kLoading?.isShowing != true) {
-              kLoading = showLoading()
+            if (kKLoading?.isShowing != true) {
+              kKLoading = showLoading()
             }
           }
         }
 
         is LoadState.Loaded -> {
           if (hookLoaded?.invoke(it) != true) {
-            kLoading?.dismiss()
+            kKLoading?.dismiss()
           }
         }
 
         is LoadState.LoadError -> {
           if (hookLoadError?.invoke(it) != true) {
-            kLoading?.dismiss()
+            kKLoading?.dismiss()
             it.exception?.handleForNetwork()
           }
         }

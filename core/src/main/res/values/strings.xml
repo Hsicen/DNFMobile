@@ -49,4 +49,10 @@
   <!--Image description-->
   <string name="img_desc">hsiceni@gmail.com</string>
 
+  <!--=====搜索条=====-->
+  <string name="transition_search_bar_bg">transition_search_bar_bg</string>
+  <string name="transition_search_bar_flag">transition_search_bar_flag</string>
+  <string name="transition_search_bar_hint">transition_search_bar_hint</string>
+  <string name="label_search">搜索</string>
+
 </resources>

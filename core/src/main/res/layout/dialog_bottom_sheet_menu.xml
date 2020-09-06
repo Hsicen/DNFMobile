@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <TextView
+    android:id="@+id/tv_title"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="@dimen/padding_z2"
+    android:paddingBottom="@dimen/padding_z2"
+    android:textColor="@color/font_g4"
+    android:textSize="@dimen/font_z4"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="标题" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_menu"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+    tools:itemCount="4"
+    tools:listitem="@layout/item_bottom_sheet_menu" />
+
+  <include
+    android:id="@+id/include_action"
+    layout="@layout/item_bottom_sheet_menu"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/rv_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

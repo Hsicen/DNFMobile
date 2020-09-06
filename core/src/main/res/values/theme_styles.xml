@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!--=====Toast动画=====-->
+  <style name="Animation.KActionToast" parent="android:Animation">
+    <item name="android:windowEnterAnimation">@anim/action_toast_in</item>
+    <item name="android:windowExitAnimation">@anim/action_toast_out</item>
+  </style>
+
+</resources>

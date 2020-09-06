@@ -16,4 +16,7 @@ object GlobalConfigs {
 
   /** 网络请求超时时间. */
   const val HTTP_TIME_OUT = 30L
+
+  /***默认电话 */
+  const val CONSUMER_PHONE = "10086"
 }

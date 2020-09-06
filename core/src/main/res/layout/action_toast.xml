@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/dp_10">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_10"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/shape_toast_default"
+    android:paddingLeft="6dp"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingRight="6dp"
+    android:paddingBottom="@dimen/dp_10">
+
+    <ImageButton
+      android:id="@+id/close"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:adjustViewBounds="true"
+      android:background="@null"
+      android:outlineProvider="none"
+      android:padding="3dp"
+      android:scaleType="fitCenter"
+      android:src="@drawable/ic_action_toast_close"
+      android:translationZ="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toLeftOf="@+id/content"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="ContentDescription" />
+
+    <TextView
+      android:id="@+id/content"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="6dp"
+      android:layout_marginRight="6dp"
+      android:gravity="center_vertical"
+      android:lineSpacingExtra="2dp"
+      android:textColor="@color/white"
+      android:textSize="@dimen/font_z3"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toRightOf="@+id/close"
+      app:layout_constraintRight_toLeftOf="@+id/action"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="提示内容" />
+
+    <Button
+      android:id="@+id/action"
+      android:layout_width="78dp"
+      android:layout_height="32dp"
+      android:layout_marginLeft="3dp"
+      android:layout_marginRight="3dp"
+      android:background="@drawable/btn_light_round_bg_1"
+      android:gravity="center"
+      android:textColor="@color/primary_c1"
+      android:textSize="@dimen/font_z3"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toRightOf="@+id/content"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="操作" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

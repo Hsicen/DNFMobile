@@ -1,4 +1,4 @@
-package com.hsicen.core.ui.alert
+package com.hsicen.core.ui.dialog
 
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.hsicen.core.R
 import com.hsicen.core.coreComponent
+import com.hsicen.core.utils.glide.loadImage
 import com.hsicen.extensions.extensions.click
 import com.hsicen.extensions.extensions.clickThrottle
 import com.hsicen.extensions.extensions.inflate
@@ -18,14 +19,14 @@ import kotlinx.android.synthetic.main.dialog_ad.view.*
  * 功能：
  * 描述：广告弹窗
  */
-class AdDialog(
+class KAdDialog(
   context: Context,
   private val builder: Builder
 ) : AlertDialog(context, R.style.Dialog_Default) {
 
-  private var negativeClick: ((AdDialog) -> Unit)? = null
-  private var positiveClick: ((AdDialog) -> Unit)? = null
-  private var imgClick: ((AdDialog) -> Unit)? = null
+  private var negativeClick: ((KAdDialog) -> Unit)? = null
+  private var positiveClick: ((KAdDialog) -> Unit)? = null
+  private var imgClick: ((KAdDialog) -> Unit)? = null
   private var onDismiss: (() -> Unit)? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,12 +54,12 @@ class AdDialog(
       root.tv_kdialog_close.isVisible = true
 
       root.img_kdialog_message.clickThrottle {
-        imgClick?.invoke(this@AdDialog)
+        imgClick?.invoke(this@KAdDialog)
       }
     } else {
       /***  广告跳转.*/
       root.img_kdialog_message.clickThrottle {
-        imgClick?.invoke(this@AdDialog)
+        imgClick?.invoke(this@KAdDialog)
       }
 
       root.tv_kdialog_title.isVisible = false
@@ -79,12 +80,12 @@ class AdDialog(
    * @param negativeClick ((AdDialog) -> Unit)
    * @return AdDialog
    */
-  fun onNegativeButtonClick(negativeClick: ((AdDialog) -> Unit)): AdDialog {
+  fun onNegativeButtonClick(negativeClick: ((KAdDialog) -> Unit)): KAdDialog {
     this.negativeClick = negativeClick
     return this
   }
 
-  fun onImgClick(imgClick: ((AdDialog) -> Unit)): AdDialog {
+  fun onImgClick(imgClick: ((KAdDialog) -> Unit)): KAdDialog {
     this.imgClick = imgClick
     return this
   }
@@ -94,7 +95,7 @@ class AdDialog(
    * @param positiveClick ((AdDialog) -> Unit)
    * @return AdDialog
    */
-  fun onPositiveButtonClick(positiveClick: ((AdDialog) -> Unit)): AdDialog {
+  fun onPositiveButtonClick(positiveClick: ((KAdDialog) -> Unit)): KAdDialog {
     this.positiveClick = positiveClick
     return this
   }
@@ -111,7 +112,7 @@ class AdDialog(
    * 显示.
    * @return AdDialog
    */
-  internal fun showInternal(): AdDialog {
+  internal fun showInternal(): KAdDialog {
     show()
     return this
   }
@@ -142,8 +143,8 @@ class AdDialog(
      * @param builder Builder.() -> Unit
      * @return AdDialog
      */
-    fun show(context: Context, builder: Builder.() -> Unit): AdDialog =
-      AdDialog(context, Builder().apply(builder)).showInternal()
+    fun show(context: Context, builder: Builder.() -> Unit): KAdDialog =
+      KAdDialog(context, Builder().apply(builder)).showInternal()
 
     /**
      * 显示弹窗.
@@ -151,7 +152,7 @@ class AdDialog(
      * @param builder Builder.() -> Unit
      * @return AdDialog?
      */
-    fun show(fragment: Fragment, builder: Builder.() -> Unit): AdDialog? =
+    fun show(fragment: Fragment, builder: Builder.() -> Unit): KAdDialog? =
       fragment.activity?.let { show(it, builder) }
   }
 }
