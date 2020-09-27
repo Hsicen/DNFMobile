@@ -1,8 +1,8 @@
 ext {
   //环境配置
-  environment = [dev: [server: "http://hsicen.dvo.com"],
-                 ts : [server: "http://hsicen.ts.com"],
-                 prd: [server: "https://hsicen.com"]]
+  environment = [dev: [server: "https://api.github.com"],
+                 ts : [server: "https://api.github.com"],
+                 prd: [server: "https://api.github.com"]]
 
   //编译版本配置
   app_key = [dev    : [applicationId: "com.hsicen.app.dev",
