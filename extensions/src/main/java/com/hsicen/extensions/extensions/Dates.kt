@@ -51,11 +51,11 @@ const val FORMAT_ISO8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
 fun Date.d2s(format: String): String? = formatter(format).format(this)
 
 fun String.s2d(format: String): Date? =
-    runCatching {
-        formatter(format).parse(this)
-    }.onFailure {
-        Logger.e(it, "")
-    }.getOrNull()
+  runCatching {
+    formatter(format).parse(this)
+  }.onFailure {
+    Logger.e(it, "")
+  }.getOrNull()
 
 fun String.cnLong2d() = s2d(FORMAT_CN_LONG)
 fun String.cnShort2d() = s2d(FORMAT_CN_SHORT)
@@ -100,27 +100,27 @@ fun Date.addYear(step: Int) = applyWrap { add(Calendar.YEAR, step) }
 fun Date.addHour(step: Int) = applyWrap { add(Calendar.HOUR_OF_DAY, step) }
 
 fun Date.isToday(): Boolean {
-    val calendar = Calendar.getInstance().apply { time = this@isToday }
-    val today = Calendar.getInstance()
+  val calendar = Calendar.getInstance().apply { time = this@isToday }
+  val today = Calendar.getInstance()
 
-    return calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-            calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
-            calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)
+  return calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+      calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
+      calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)
 }
 
 /**
  * 将Date向上提到Calendar中处理完再降回Date
  */
 private fun Date.applyWrap(action: Calendar.() -> Unit) = Calendar.getInstance()
-    .apply {
-        time = this@applyWrap
-        action()
-    }
-    .time
+  .apply {
+    time = this@applyWrap
+    action()
+  }
+  .time
 
 /**
  * 计算时间相减（以天为单位）
  */
 operator fun Date.minus(other: Date): Long {
-    return TimeUnit.DAYS.convert(this.time - other.time, TimeUnit.MILLISECONDS)
+  return TimeUnit.DAYS.convert(this.time - other.time, TimeUnit.MILLISECONDS)
 }

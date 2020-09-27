@@ -17,25 +17,25 @@ import com.hsicen.extensions.utils.GlobalContext
  */
 
 fun <T : Drawable> Int.mutateDrawable(): T? =
-    kotlin.runCatching {
-        Resources.getSystem().getDrawable(this).mutate() as? T
-    }.getOrNull()
+  kotlin.runCatching {
+    Resources.getSystem().getDrawable(this).mutate() as? T
+  }.getOrNull()
 
 fun Int.mutateColorStateList(): ColorStateList? =
-    kotlin.runCatching {
-        val resources = Resources.getSystem()
-        val xml = resources.getXml(this)
-        ColorStateList.createFromXml(resources, xml)
-    }.getOrNull()
+  kotlin.runCatching {
+    val resources = Resources.getSystem()
+    val xml = resources.getXml(this)
+    ColorStateList.createFromXml(resources, xml)
+  }.getOrNull()
 
 fun Int.layoutIdToBitmap(width: Int, height: Int): Bitmap {
-    val view = LayoutInflater.from(GlobalContext.mContext).inflate(this, null)
-    val widthSpec = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY)
-    val heightSpec = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
-    view.measure(widthSpec, heightSpec)
-    view.layout(0, 0, width, height)
-    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(bitmap)
-    view.draw(canvas)
-    return bitmap
+  val view = LayoutInflater.from(GlobalContext.mContext).inflate(this, null)
+  val widthSpec = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY)
+  val heightSpec = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
+  view.measure(widthSpec, heightSpec)
+  view.layout(0, 0, width, height)
+  val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+  val canvas = Canvas(bitmap)
+  view.draw(canvas)
+  return bitmap
 }

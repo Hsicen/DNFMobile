@@ -20,7 +20,7 @@ import com.hsicen.extensions.utils.LiveDataBroadcast
  * @return LiveData<Intent>
  */
 fun Context.liveDataBroadcast(vararg filters: String): LiveData<Intent> =
-    liveDataBroadcast(IntentFilter().apply { filters.forEach { addAction(it) } })
+  liveDataBroadcast(IntentFilter().apply { filters.forEach { addAction(it) } })
 
 /**
  * 订阅广播.
@@ -29,4 +29,4 @@ fun Context.liveDataBroadcast(vararg filters: String): LiveData<Intent> =
  * @return LiveData<Intent>
  */
 fun Context.liveDataBroadcast(filters: IntentFilter): LiveData<Intent> =
-    LiveDataBroadcast(this, filters)
+  LiveDataBroadcast(this, filters)

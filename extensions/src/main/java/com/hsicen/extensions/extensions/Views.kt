@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.orhanobut.logger.Logger
+import kotlin.math.abs
 
 /**
  * View控件扩展.
@@ -77,9 +78,9 @@ fun View.toBitmap(isInflater: Boolean = false): Bitmap? {
     val height = if (this.height <= 0) screenHeight() else this.height
 
     if (isInflater) {
-      val measeurWidth = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY)
-      val measeurHeight = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
-      this.measure(measeurWidth, measeurHeight)
+      val measuredWidth = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY)
+      val measuredHeight = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
+      this.measure(measuredWidth, measuredHeight)
       this.layout(0, 0, this.measuredWidth, this.measuredHeight)
     }
 
@@ -90,14 +91,13 @@ fun View.toBitmap(isInflater: Boolean = false): Bitmap? {
     bitmap
   }.onFailure {
     Logger.e("$it")
-  }
-    .getOrNull()
+  }.getOrNull()
 
 }
 
 /** Y轴偏移值. */
 val Paint.textOffsetY: Float
-  get() = Math.abs(fontMetrics.top + fontMetrics.bottom) / 2
+  get() = abs(fontMetrics.top + fontMetrics.bottom) / 2
 
 inline fun TextView.clearText() {
   text = ""

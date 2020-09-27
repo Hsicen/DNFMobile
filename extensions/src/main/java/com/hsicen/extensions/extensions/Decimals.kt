@@ -15,14 +15,14 @@ import java.math.BigDecimal
  *  @param formatStyle 默认四舍五入, ios的四舍五入是银行家算法
  */
 fun Double?.digitFormat(digitNum: Int = 2, formatStyle: Int = BigDecimal.ROUND_HALF_UP): Double? {
-    if (this == null) return null
-    // 注意，double转bigDecimal只能用valueOf.
-    return BigDecimal.valueOf(this).setScale(digitNum, formatStyle).toDouble()
+  if (this == null) return null
+  // 注意，double转bigDecimal只能用valueOf.
+  return BigDecimal.valueOf(this).setScale(digitNum, formatStyle).toDouble()
 }
 
 fun Float?.digitFormat(digitNum: Int = 2, formatStyle: Int = BigDecimal.ROUND_HALF_UP): Float? {
-    if (this == null) return null
-    return BigDecimal("$this").setScale(digitNum, formatStyle).toFloat()
+  if (this == null) return null
+  return BigDecimal("$this").setScale(digitNum, formatStyle).toFloat()
 }
 
 /**
@@ -31,34 +31,34 @@ fun Float?.digitFormat(digitNum: Int = 2, formatStyle: Int = BigDecimal.ROUND_HA
  *  @param denominator 分母
  */
 fun Double?.safeDiv(denominatorStr: String?): Double? {
-    val denominator = denominatorStr?.toDoubleOrNull() ?: return null
-    return if (denominator == 0.0) {
-        null
-    } else {
-        this?.div(denominator)
-    }
+  val denominator = denominatorStr?.toDoubleOrNull() ?: return null
+  return if (denominator == 0.0) {
+    null
+  } else {
+    this?.div(denominator)
+  }
 }
 
 fun Float?.safeDiv(denominator: Double?): Double? {
-    return if (denominator == null || denominator == 0.0) {
-        null
-    } else {
-        this?.div(denominator)
-    }
+  return if (denominator == null || denominator == 0.0) {
+    null
+  } else {
+    this?.div(denominator)
+  }
 }
 
 fun Float?.safeDiv(denominator: Float?): Float? {
-    return if (denominator == null || denominator == 0f) {
-        null
-    } else {
-        this?.div(denominator)
-    }
+  return if (denominator == null || denominator == 0f) {
+    null
+  } else {
+    this?.div(denominator)
+  }
 }
 
 fun Float?.safeDiv(denominator: Int?): Float? {
-    return if (denominator == null || denominator == 0) {
-        null
-    } else {
-        this?.div(denominator)
-    }
+  return if (denominator == null || denominator == 0) {
+    null
+  } else {
+    this?.div(denominator)
+  }
 }
