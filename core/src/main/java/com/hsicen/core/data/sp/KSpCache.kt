@@ -10,10 +10,10 @@ import com.chibatching.kotpref.KotprefModel
  */
 object KSpCache : KotprefModel() {
 
-  /** 重定义Sp文件名字. */
-  override val kotprefName: String
-    get() = "hsicen_sp_cache"
+    /** 重定义Sp文件名字. */
+    override val kotprefName: String
+        get() = "hsicen_sp_cache"
 
-  /** imei缓存. */
-  var imei: String by stringPref("hsicen", "")
+    /** imei缓存. */
+    var imei: String by stringPref("hsicen", "")
 }

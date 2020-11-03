@@ -1,6 +1,7 @@
 package com.hsicen.dnfmobile
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.hsicen.core.arch.CoreViewModel
 import com.hsicen.core.dagger.module.ViewModelAssistedFactory
 import com.hsicen.core.data.onFailure
@@ -17,7 +18,7 @@ import javax.inject.Inject
  */
 class GithubViewModel @Inject constructor(private val githubPresenter: GithubPresenter) : CoreViewModel() {
 
-  fun fetchUserRepo(user: String) = launch {
+  fun fetchUserRepo(user: String) = viewModelScope.launch {
     githubPresenter.fetchUserRepo(user)
       .onSuccess {
         Logger.d("hsc", "获取用户信息成功")
